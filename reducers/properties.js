@@ -11,13 +11,14 @@ const properties = (state = initialState, action) => {
       return state.properties.concat(property)
 
     case 'UPDATE_PROPERTY':
-      return state.properties.update(
-        state.properties.findIndex((property) =>
-          property.get('property_id') === action.property_id
-        ),
-        (property) =>
-          property.set(action.key, action.value)
-      )
+      return state.map((property) => {
+        if(property.property_id == action.property_id) {
+          let newPropObj = {}
+          newPropObj[action.key] = action.value
+          return Object.assign({}, property, newPropObj)
+        }
+        return property
+      })
 
     default:
       return state;
