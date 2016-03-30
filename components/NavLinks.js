@@ -1,10 +1,11 @@
 import React from 'react'
 
-const NavLinks = (properties) => (
+const NavLinks = (props) => (
   <ul>
     <li>Constants</li>
-    {properties.map((property)=>
-      <li key={property.id}>{property.nickname}</li>
+    {console.log(props)}
+    {props.properties.map((property)=>
+      <li key={property.id}>{property.name}</li>
     )}
     <li>New property</li>
   </ul>

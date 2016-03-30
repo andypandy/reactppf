@@ -1,4 +1,5 @@
 import React from 'react'
+import NavLinks from '../components/NavLinks'
 
 class Main extends React.Component {
   constructor(props) {
@@ -15,13 +16,9 @@ class Main extends React.Component {
     return (
       <div>
         <h1>Main component</h1>
-        <ul>
-          <li>Constants</li>
-          {this.props.properties.map((property)=>
-            <li key={property.property_id}>{property.name}</li>
-          )}
-          <li>New property</li>
-        </ul>
+
+        <NavLinks properties={this.props.properties} />
+
         <div>
           {this.props.children}
         </div>
