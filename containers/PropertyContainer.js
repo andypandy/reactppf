@@ -9,9 +9,23 @@ const getCurrentProperty = (properties, property_id)=> {
   )[0]
 }
 
+const getUnitsForProperty = (units, property) => {
+  return units.filter((unit)=>{
+    console.log(property)
+    property.units.indexOf(unit.unit_id) != -1
+  })
+}
+
 const mapStateToProps = (state, ownProps) => {
+  console.log('state', state);
+  let currentProperty = getCurrentProperty(state.properties, ownProps.routeParams.property_id)
+  let currentUnits = getUnitsForProperty(state.units, currentProperty)
+
+  console.log('units', currentUnits)
+
   return {
-    property: getCurrentProperty(state.properties, ownProps.routeParams.property_id)
+    property: currentProperty,
+    units: currentUnits
   }
 }
 
@@ -27,7 +41,5 @@ const PropertyContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Property)
-
-//Property will have these props: `property`, `onPropertyInChange`
 
 export default PropertyContainer

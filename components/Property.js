@@ -24,30 +24,35 @@ const hardSoftCosts = (p) =>
 const totalProjectCost = (p) =>
   parseFloat(p.landCost)+parseFloat(hardCosts(p))+parseFloat(softCosts(p))
 
-const rentMonthly = (p) =>
-  p.rentPerSFMonthly*p.sf
-
-const rentAnnual = (p) =>
-  rentMonthly(p)*12
-
-const grossPotentialIncome = (p) =>
-  rentAnnual(p)
-
-const vacancyExpense = (p) =>
-  -grossPotentialIncome(p)*p.vacancyRate
-
-const grossOperatingIncome = (p) =>
-  grossPotentialIncome(p)+vacancyExpense(p)
-
-const operatingExpense = (p) => {
-  return -(grossOperatingIncome(p))*p.operatingExpenseRate
+const rentMonthly = (p, u) => {
+  console.log(u);
+  let totalRent = 0
+  for(let i=0;i<u.length; i++) totalRent += u[i].sf*u[i].rent
+  return totalRent;
+  //p.rentPerSFMonthly*p.sf
 }
 
-const netOperatingIncome = (p) =>
-  grossOperatingIncome(p)+operatingExpense(p)
+const rentAnnual = (p, u) =>
+  rentMonthly(p, u)*12
 
-const cashReturn = (p) =>
-  netOperatingIncome(p)/totalProjectCost(p)
+const grossPotentialIncome = (p, u) =>
+  rentAnnual(p, u)
+
+const vacancyExpense = (p, u) =>
+  -grossPotentialIncome(p, u)*p.vacancyRate
+
+const grossOperatingIncome = (p, u) =>
+  grossPotentialIncome(p, u)+vacancyExpense(p, u)
+
+const operatingExpense = (p, u) => {
+  return -(grossOperatingIncome(p, u))*p.operatingExpenseRate
+}
+
+const netOperatingIncome = (p, u) =>
+  grossOperatingIncome(p, u)+operatingExpense(p, u)
+
+const cashReturn = (p, u) =>
+  netOperatingIncome(p, u)/totalProjectCost(p)
 
 const downPayment = (p) =>
   totalProjectCost(p)*p.downPaymentRate
@@ -64,26 +69,28 @@ const debtPaymentMonthly = (p) => {
 }
 
 const debtPaymentAnnual = (p) =>
-  debtPaymentMonthly(p)
+  debtPaymentMonthly(p)*12
 
-const cashFlowMonthly = (p) =>
-  cashFlowAnnual(p)/12
+const cashFlowMonthly = (p, u) =>
+  cashFlowAnnual(p, u)/12
 
-const cashFlowAnnual = (p) =>
-  netOperatingIncome(p)-debtPaymentAnnual(p)
+const cashFlowAnnual = (p, u) =>
+  netOperatingIncome(p, u)-debtPaymentAnnual(p)
 
 const loanConstant = (p) =>
   debtPaymentAnnual(p)/debt(p)
 
-const debtServiceCoverageRatio = (p) =>
-  netOperatingIncome(p)/debtPaymentAnnual(p)
+const debtServiceCoverageRatio = (p, u) =>
+  netOperatingIncome(p, u)/debtPaymentAnnual(p)
 
-const preTaxReturnOnEquity = (p) =>
-  cashFlowAnnual(p)/downPayment(p)
+const preTaxReturnOnEquity = (p, u) =>
+  cashFlowAnnual(p, u)/downPayment(p)
 
 
-const Property = ({property, handlePropertyInputChange}) => (
+const Property = ({property, units, handlePropertyInputChange}) => (
   <div>
+
+    <p>units: {units[0]}</p>
     <div>
       <label>Name: {property.name}</label>
       <input
@@ -202,23 +209,23 @@ const Property = ({property, handlePropertyInputChange}) => (
       Soft costs as percent of project {percentOfProjectSoftCosts(property)}<br />
       Hard costs + Soft costs {hardSoftCosts(property)}<br />
       Total project cost {totalProjectCost(property)}<br />
-      Monthly rent {rentMonthly(property)}<br />
-      Annual rent {rentAnnual(property)}<br />
-      GPI {grossPotentialIncome(property)}<br />
-      Vacancy expense {vacancyExpense(property)}<br />
-      Gross operating income {grossOperatingIncome(property)}<br />
-      Operating expense {operatingExpense(property)}<br />
-      NOI {netOperatingIncome(property)}<br />
-      Cash return {cashReturn(property)}<br />
+      Monthly rent {rentMonthly(property, units)}<br />
+      Annual rent {rentAnnual(property, units)}<br />
+      GPI {grossPotentialIncome(property, units)}<br />
+      Vacancy expense {vacancyExpense(property, units)}<br />
+      Gross operating income {grossOperatingIncome(property, units)}<br />
+      Operating expense {operatingExpense(property, units)}<br />
+      NOI {netOperatingIncome(property, units)}<br />
+      Cash return {cashReturn(property, units)}<br />
       Down payment {downPayment(property)}<br />
       Debt {debt(property)}<br />
       Debt payment (monthly) {debtPaymentMonthly(property).toFixed(2)}<br />
       Debt payment (annual) {debtPaymentAnnual(property)}<br />
-      Cash flow (monthly) {cashFlowMonthly(property)}<br />
-      Cash flow (annual) {cashFlowAnnual(property).toFixed(2)}<br />
+      Cash flow (monthly) {cashFlowMonthly(property, units)}<br />
+      Cash flow (annual) {cashFlowAnnual(property, units).toFixed(2)}<br />
       Loan constant {loanConstant(property)}<br />
-      Debt service coverage ratio {debtServiceCoverageRatio(property)}<br />
-      Pretax return on equity {preTaxReturnOnEquity(property)}
+      Debt service coverage ratio {debtServiceCoverageRatio(property, units)}<br />
+      Pretax return on equity {preTaxReturnOnEquity(property, units)}
     </div>
   </div>
 )
@@ -248,8 +255,8 @@ Soft % of project         percentOfProjectSoftCosts
 Hard+soft costs           hardSoftCosts
 Total project costs       totalProjectCost
 
-Rent rate/SF              rentPerSF
-Square feet*              SF
+*Rent rate/SF             rentPerSF
+*Square feet              SF
 Monthly rent              rentMonthly
 Annual rent               rentAnnual
 Gross potential income    grossPotentialIncome
