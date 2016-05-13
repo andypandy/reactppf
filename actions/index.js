@@ -20,3 +20,11 @@ export const toggleShowDeletedProperties = () => {
     type: 'TOGGLE_SHOW_DELETED_PROPERTIES'
   }
 }
+
+export const addUnit = (property_id, unit) => {
+  return {
+    type: 'ADD_UNIT',
+    property_id,
+    unit
+  }
+}

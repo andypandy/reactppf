@@ -28,5 +28,4 @@ const MainContainer = connect(
   mapDispatchToProps
 )(Main)
 
-//Main will have these props: `properties`, `handleAddPropertyFormSubmit`
 export default MainContainer

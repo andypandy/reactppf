@@ -8,20 +8,16 @@ class Main extends React.Component {
     console.log('props', props);
   }
 
+  componentWillMount() {
+    console.log(arguments)
+    //This is where I fetch from server
+  }
+
+  handleChange(e) {
+    console.log(e)
+  }
+
   render() {
-    const hey = 1
-    const hey2 = {
-
-    }
-    const handleChange = (e) => {
-      console.log(e)
-    }
-
-    const getDerivedValues = (property) => {
-
-    }
-
-    //cont intermediate
 
     return (
       <div>
@@ -47,11 +43,11 @@ class Main extends React.Component {
             e.preventDefault()
             this.props.handleAddPropertyFormSubmit()
           }}>
-          <h2>Add a property</h2>
-          Label
-          Address
-          <input type="submit" value="Add property" />
-          <input value={hey} onChange={handleChange} />
+            <h2>Add a property</h2>
+            Label
+            Address
+            <input type="submit" value="Add property" />
+            <input onChange={this.handleChange} />
           </form>
         </div>
       </div>

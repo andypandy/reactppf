@@ -4,6 +4,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
+import thunk from 'redux-thunk';
 import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
@@ -16,17 +17,15 @@ import units from './reducers/units'
 import MainContainer from './containers/MainContainer'
 import PropertyContainer from './containers/PropertyContainer'
 import AddPropertyContainer from './containers/AddPropertyContainer'
-import Hey from './components/Hey'
 
-//let store = createStore(reducers)
-const store = createStore(
-  combineReducers({
-    properties,
-    units,
-    property_list,
-    routing: routerReducer
-  })
-)
+// //Configure store
+const reducer = combineReducers({
+  properties,
+  units,
+  property_list,
+  routing: routerReducer
+})
+const store = createStore(reducer, applyMiddleware(thunk))
 
 const history = syncHistoryWithStore(browserHistory, store)
 
@@ -37,7 +36,6 @@ render(
         <Route path="/property/:property_id" component={PropertyContainer} />
         <Route path="/addproperty" component={AddPropertyContainer} />
       </Route>
-      <Route path="/hey" component={Hey} />
     </Router>
   </Provider>,
   document.getElementById('root')

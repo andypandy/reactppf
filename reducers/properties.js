@@ -14,7 +14,7 @@ const initialState = [{
     downPaymentRate: .2,
     loanTermYears: 30,
     loanRateAnnual:.05,
-    units: []
+    units: [1,2]
   },
   {
     property_id: 1, name: 'Another cool property', landCost: 0, landSF: 0, units: []
@@ -24,7 +24,6 @@ const initialState = [{
 const properties = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_PROPERTY':
-
       return state.concat(property)
 
     case 'UPDATE_PROPERTY':
@@ -41,6 +40,16 @@ const properties = (state = initialState, action) => {
     case 'SAVE_PROPERTY':
       //Save on localStorage
       //Clear window.confirm flag...
+
+    case 'ADD_UNIT':
+      //Should add unit id to property's units array
+      return state.map((property) => {
+        if(property.property_id == action.property_id) {
+          property.units.push(action.unit.unit_id)
+          return property
+        }
+      })
+      return property
 
     default:
       return state;
