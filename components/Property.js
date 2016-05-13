@@ -1,236 +1,164 @@
 import React from 'react'
+import * as utils from '../utilities/utilities'
 
-const landCostPerSF = (p) =>
-  p.landCost/p.landSF
 
-const percentOfProjectLand = (p) =>
-  p.landCost/totalProjectCost(p)
+class Property extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-const hardCosts = (p) =>
-  p.hardCostsPerSF*p.sf
+  render() {
 
-const percentOfProjectHardCosts = (p) =>
-  hardCosts(p)/totalProjectCost(p)
-
-const softCosts = (p) =>
-  p.softCostsPerSF*p.sf
-
-const percentOfProjectSoftCosts = (p) =>
-  softCosts(p)/totalProjectCost(p)
-
-const hardSoftCosts = (p) =>
-  softCosts(p)+hardCosts(p)
-
-const totalProjectCost = (p) =>
-  parseFloat(p.landCost)+parseFloat(hardCosts(p))+parseFloat(softCosts(p))
-
-const rentMonthly = (p, u) => {
-  console.log(u);
-  let totalRent = 0
-  for(let i=0;i<u.length; i++) totalRent += u[i].sf*u[i].rent
-  return totalRent;
-  //p.rentPerSFMonthly*p.sf
+    return (
+      <div>
+        <p>Land cost: {utils.landCostPerSF(this.props.property)}</p>
+      </div>
+    )
+  }
 }
 
-const rentAnnual = (p, u) =>
-  rentMonthly(p, u)*12
+// const Property = ({property, units, handlePropertyInputChange, handleAddUnitFormSubmit}) => (
+//   <div>
+//     <div>
+//       <label>Name: {property.name}</label>
+//       <input
+//         value={property.name}
+//         onChange={(e)=>{
+//           handlePropertyInputChange(property.property_id, 'name', e.target.value)
+//         }}
+//       />
+//     </div>
 
-const grossPotentialIncome = (p, u) =>
-  rentAnnual(p, u)
+//     <div>
+//       <label>Name: {property.address}</label>
+//       <input
+//         value={property.address}
+//         onChange={(e)=>{
+//           handlePropertyInputChange(property.property_id, 'address', e.target.value)
+//         }}
+//       />
+//     </div>
 
-const vacancyExpense = (p, u) =>
-  -grossPotentialIncome(p, u)*p.vacancyRate
+//     <label>Land cost</label>
+//     <input
+//       value={property.landCost}
+//       onChange={(e)=>{
+//         handlePropertyInputChange(property.property_id, 'landCost', e.target.value)
+//       }}
+//     /><br />
 
-const grossOperatingIncome = (p, u) =>
-  grossPotentialIncome(p, u)+vacancyExpense(p, u)
+//     <label>Land sq. ft.</label>
+//     <input
+//       value={property.landSF}
+//       onChange={(e)=>{
+//         handlePropertyInputChange(property.property_id, 'landSF', e.target.value)
+//       }}
+//     /><br />
 
-const operatingExpense = (p, u) => {
-  return -(grossOperatingIncome(p, u))*p.operatingExpenseRate
-}
+//     <label>Hard costs per sq. ft.</label>
+//     <input
+//       value={property.hardCostsPerSF}
+//       onChange={(e)=>{
+//         handlePropertyInputChange(property.property_id, 'hardCostsPerSF', e.target.value)
+//       }}
+//     /><br />
 
-const netOperatingIncome = (p, u) =>
-  grossOperatingIncome(p, u)+operatingExpense(p, u)
+//     <label>Soft costs per sq. ft.</label>
+//     <input
+//       value={property.softCostsPerSF}
+//       onChange={(e)=>{
+//         handlePropertyInputChange(property.property_id, 'softCostsPerSF', e.target.value)
+//       }}
+//     /><br />
 
-const cashReturn = (p, u) =>
-  netOperatingIncome(p, u)/totalProjectCost(p)
+//     <label>Square feet</label>
+//     <input
+//       value={property.sf}
+//       onChange={(e)=>{
+//         handlePropertyInputChange(property.property_id, 'sf', e.target.value)
+//       }}
+//     /><br />
 
-const downPayment = (p) =>
-  totalProjectCost(p)*p.downPaymentRate
+//     <label>Rent per sq. ft. (monthly)</label>
+//     <input
+//       value={property.rentPerSFMonthly}
+//       onChange={(e)=>{
+//         handlePropertyInputChange(property.property_id, 'rentPerSFMonthly', e.target.value)
+//       }}
+//     /><br />
 
-const debt = (p) =>
-  totalProjectCost(p)-downPayment(p)
+//     <label>Vacancy rate</label>
+//     <input
+//       value={property.vacancyRate}
+//       onChange={(e)=>{
+//         handlePropertyInputChange(property.property_id, 'vacancyRate', e.target.value)
+//       }}
+//     /><br />
 
-const debtPaymentMonthly = (p) => {
-  let intr = p.loanRateAnnual/1200
-  let princ = debt(p)
-  let term = p.loanTermYears*12
+//     <label>Operating expense rate</label>
+//     <input
+//       value={property.operatingExpenseRate}
+//       onChange={(e)=>{
+//         handlePropertyInputChange(property.property_id, 'operatingExpenseRate', e.target.value)
+//       }}
+//     /><br />
 
-  return princ * intr / (1 - (Math.pow(1/(1 + intr), term)))
-}
+//     <label>Down payment percentage (eg. 20%)</label>
+//     <input
+//       value={property.downPaymentRate}
+//       onChange={(e)=>{
+//         handlePropertyInputChange(property.property_id, 'downPaymentRate', e.target.value)
+//       }}
+//     /><br />
 
-const debtPaymentAnnual = (p) =>
-  debtPaymentMonthly(p)*12
+//     <label>Loan term (years)</label>
+//     <input
+//       value={property.loanTermYears}
+//       onChange={(e)=>{
+//         handlePropertyInputChange(property.property_id, 'loanTermYears', e.target.value)
+//       }}
+//     /><br />
 
-const cashFlowMonthly = (p, u) =>
-  cashFlowAnnual(p, u)/12
+//     <label>Loan rate (annual, eg. 4.5%)</label>
+//     <input
+//       value={property.loanRateAnnual}
+//       onChange={(e)=>{
+//         handlePropertyInputChange(property.property_id, 'loanRateAnnual', e.target.value)
+//       }}
+//     /><br />
 
-const cashFlowAnnual = (p, u) =>
-  netOperatingIncome(p, u)-debtPaymentAnnual(p)
+//     <h2>Cost/SF: {property.landCost/property.landSF}</h2>
+//     <div>
+//       Land cost per sq. ft. {landCostPerSF(property)}<br />
+//       Land cost as percent of project {percentOfProjectLand(property)}<br />
+//       Hard costs {hardCosts(property)}<br />
+//       Hard costs as percent of project {percentOfProjectHardCosts(property)}<br />
+//       Soft costs {softCosts(property)}<br />
+//       Soft costs as percent of project {percentOfProjectSoftCosts(property)}<br />
+//       Hard costs + Soft costs {hardSoftCosts(property)}<br />
+//       Total project cost {totalProjectCost(property)}<br />
+//       Monthly rent {rentMonthly(property, units)}<br />
+//       Annual rent {rentAnnual(property, units)}<br />
+//       GPI {grossPotentialIncome(property, units)}<br />
+//       Vacancy expense {vacancyExpense(property, units)}<br />
+//       Gross operating income {grossOperatingIncome(property, units)}<br />
+//       Operating expense {operatingExpense(property, units)}<br />
+//       NOI {netOperatingIncome(property, units)}<br />
+//       Cash return {cashReturn(property, units)}<br />
+//       Down payment {downPayment(property)}<br />
+//       Debt {debt(property)}<br />
+//       Debt payment (monthly) {debtPaymentMonthly(property).toFixed(2)}<br />
+//       Debt payment (annual) {debtPaymentAnnual(property)}<br />
+//       Cash flow (monthly) {cashFlowMonthly(property, units)}<br />
+//       Cash flow (annual) {cashFlowAnnual(property, units).toFixed(2)}<br />
+//       Loan constant {loanConstant(property)}<br />
+//       Debt service coverage ratio {debtServiceCoverageRatio(property, units)}<br />
+//       Pretax return on equity {preTaxReturnOnEquity(property, units)}
+//     </div>
+//   </div>
+// )
 
-const loanConstant = (p) =>
-  debtPaymentAnnual(p)/debt(p)
-
-const debtServiceCoverageRatio = (p, u) =>
-  netOperatingIncome(p, u)/debtPaymentAnnual(p)
-
-const preTaxReturnOnEquity = (p, u) =>
-  cashFlowAnnual(p, u)/downPayment(p)
-
-
-const Property = ({property, units, handlePropertyInputChange}) => (
-  <div>
-
-    <p>units: {units[0]}</p>
-    <div>
-      <label>Name: {property.name}</label>
-      <input
-        value={property.name}
-        onChange={(e)=>{
-          handlePropertyInputChange(property.property_id, 'name', e.target.value)
-        }}
-      />
-    </div>
-
-    <div>
-      <label>Name: {property.address}</label>
-      <input
-        value={property.address}
-        onChange={(e)=>{
-          handlePropertyInputChange(property.property_id, 'address', e.target.value)
-        }}
-      />
-    </div>
-
-    <label>Land cost</label>
-    <input
-      value={property.landCost}
-      onChange={(e)=>{
-        handlePropertyInputChange(property.property_id, 'landCost', e.target.value)
-      }}
-    /><br />
-
-    <label>Land sq. ft.</label>
-    <input
-      value={property.landSF}
-      onChange={(e)=>{
-        handlePropertyInputChange(property.property_id, 'landSF', e.target.value)
-      }}
-    /><br />
-
-    <label>Hard costs per sq. ft.</label>
-    <input
-      value={property.hardCostsPerSF}
-      onChange={(e)=>{
-        handlePropertyInputChange(property.property_id, 'hardCostsPerSF', e.target.value)
-      }}
-    /><br />
-
-    <label>Soft costs per sq. ft.</label>
-    <input
-      value={property.softCostsPerSF}
-      onChange={(e)=>{
-        handlePropertyInputChange(property.property_id, 'softCostsPerSF', e.target.value)
-      }}
-    /><br />
-
-    <label>Square feet</label>
-    <input
-      value={property.sf}
-      onChange={(e)=>{
-        handlePropertyInputChange(property.property_id, 'sf', e.target.value)
-      }}
-    /><br />
-
-    <label>Rent per sq. ft. (monthly)</label>
-    <input
-      value={property.rentPerSFMonthly}
-      onChange={(e)=>{
-        handlePropertyInputChange(property.property_id, 'rentPerSFMonthly', e.target.value)
-      }}
-    /><br />
-
-    <label>Vacancy rate</label>
-    <input
-      value={property.vacancyRate}
-      onChange={(e)=>{
-        handlePropertyInputChange(property.property_id, 'vacancyRate', e.target.value)
-      }}
-    /><br />
-
-    <label>Operating expense rate</label>
-    <input
-      value={property.operatingExpenseRate}
-      onChange={(e)=>{
-        handlePropertyInputChange(property.property_id, 'operatingExpenseRate', e.target.value)
-      }}
-    /><br />
-
-    <label>Down payment percentage (eg. 20%)</label>
-    <input
-      value={property.downPaymentRate}
-      onChange={(e)=>{
-        handlePropertyInputChange(property.property_id, 'downPaymentRate', e.target.value)
-      }}
-    /><br />
-
-    <label>Loan term (years)</label>
-    <input
-      value={property.loanTermYears}
-      onChange={(e)=>{
-        handlePropertyInputChange(property.property_id, 'loanTermYears', e.target.value)
-      }}
-    /><br />
-
-    <label>Loan rate (annual, eg. 4.5%)</label>
-    <input
-      value={property.loanRateAnnual}
-      onChange={(e)=>{
-        handlePropertyInputChange(property.property_id, 'loanRateAnnual', e.target.value)
-      }}
-    /><br />
-
-    <h2>Cost/SF: {property.landCost/property.landSF}</h2>
-    <div>
-      Land cost per sq. ft. {landCostPerSF(property)}<br />
-      Land cost as percent of project {percentOfProjectLand(property)}<br />
-      Hard costs {hardCosts(property)}<br />
-      Hard costs as percent of project {percentOfProjectHardCosts(property)}<br />
-      Soft costs {softCosts(property)}<br />
-      Soft costs as percent of project {percentOfProjectSoftCosts(property)}<br />
-      Hard costs + Soft costs {hardSoftCosts(property)}<br />
-      Total project cost {totalProjectCost(property)}<br />
-      Monthly rent {rentMonthly(property, units)}<br />
-      Annual rent {rentAnnual(property, units)}<br />
-      GPI {grossPotentialIncome(property, units)}<br />
-      Vacancy expense {vacancyExpense(property, units)}<br />
-      Gross operating income {grossOperatingIncome(property, units)}<br />
-      Operating expense {operatingExpense(property, units)}<br />
-      NOI {netOperatingIncome(property, units)}<br />
-      Cash return {cashReturn(property, units)}<br />
-      Down payment {downPayment(property)}<br />
-      Debt {debt(property)}<br />
-      Debt payment (monthly) {debtPaymentMonthly(property).toFixed(2)}<br />
-      Debt payment (annual) {debtPaymentAnnual(property)}<br />
-      Cash flow (monthly) {cashFlowMonthly(property, units)}<br />
-      Cash flow (annual) {cashFlowAnnual(property, units).toFixed(2)}<br />
-      Loan constant {loanConstant(property)}<br />
-      Debt service coverage ratio {debtServiceCoverageRatio(property, units)}<br />
-      Pretax return on equity {preTaxReturnOnEquity(property, units)}
-    </div>
-  </div>
-)
-
-Property.propTypes = { landCost: React.PropTypes.number }
+// Property.propTypes = { landCost: React.PropTypes.number }
 
 export default Property
 
