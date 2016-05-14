@@ -13,15 +13,15 @@ export function totalSF(u) {
 }
 
 export function hardCosts(p, u){
-  p.hardCostsPerSF*exports.totalSF(u)
+  return (p.hardCostsPerSF*exports.totalSF(u)).toFixed(2)
 }
 
 export function percentOfProjectHardCosts(p){
-  exports.hardCosts(p)/exports.totalProjectCost(p)
+  return exports.hardCosts(p)/exports.totalProjectCost(p)
 }
 
 export function softCosts(p, u){
-  p.softCostsPerSF*exports.totalSF(u)
+  return p.softCostsPerSF*exports.totalSF(u)
 }
 
 export function percentOfProjectSoftCosts(p){
