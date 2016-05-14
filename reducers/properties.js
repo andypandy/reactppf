@@ -1,5 +1,3 @@
-//import {List, Map} from 'immutable';
-
 const initialState = [{
     property_id: 0,
     name:'Cool initial property',
@@ -24,7 +22,7 @@ const initialState = [{
 const properties = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_PROPERTY':
-      return state.concat(property)
+      return state.concat(action.property)
 
     case 'UPDATE_PROPERTY':
       return state.map((property) => {
@@ -36,20 +34,28 @@ const properties = (state = initialState, action) => {
         return property
       })
 
-    //Save to server - used to send it to server
-    case 'SAVE_PROPERTY':
-      //Save on localStorage
-      //Clear window.confirm flag...
+    case 'DELETE_PROPERTY':
+      return state.filter((property)=>{
+        return property.property_id != action.property_id
+      })
 
     case 'ADD_UNIT':
-      //Should add unit id to property's units array
       return state.map((property) => {
         if(property.property_id == action.property_id) {
-          property.units.push(action.unit.unit_id)
+          property.units.push(action.unit_id)
           return property
         }
       })
       return property
+
+    case 'DELETE_UNIT':
+      return state.map((property)=>{
+        if(property.property_id == action.property_id) {
+          property.units = property.units.filter((unit_id)=>{
+            return unit_id != action.unit_id
+          })
+        }
+      })
 
     default:
       return state;
@@ -58,31 +64,3 @@ const properties = (state = initialState, action) => {
 
 
 export default properties
-
-
-// //Tests
-// //Add
-// expect(reactppfReducers([], {
-//   type: 'ADD_PROPERTY',
-//   property: {}
-// }).length).toEqual(1);
-
-
-// //Update
-// let oldState = {
-//   properties: [{
-//     property_id: 123,
-//     name: 'Untested property'
-//   }]
-// };
-
-// let newState = reactppfReducers(oldState, {
-//   property_id: 123,
-//   name: 'Tested property'
-// })
-
-// expect(newState)[0].name).toEqual('Tested property');
-
-
-// //Invalid type
-// expect(reactppfReducers([], {type:'heyo!'})).toEqual([]);
