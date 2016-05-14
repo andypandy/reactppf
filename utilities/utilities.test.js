@@ -1,7 +1,7 @@
 import expect from 'expect'
 import * as utils from './utilities'
 
-describe('property ratio helpers', ()=>{
+describe('utilities/property ratio helpers', ()=>{
   const property = {
     landCost: 100000,
     landSF: 4523,
@@ -43,9 +43,9 @@ describe('property ratio helpers', ()=>{
     expect(expected).toEqual(actual)
   })
 
-  xit('should calculate hard costs', ()=>{
-    let expected
-    let actual
+  it('should calculate hard costs', ()=>{
+    let expected = 200000.00
+    let actual = utils.hardCosts(property, units)
     expect(expected).toEqual(actual)
   })
 
@@ -55,9 +55,9 @@ describe('property ratio helpers', ()=>{
     expect(expected).toEqual(actual)
   })
 
-  xit('should calculate soft costs', ()=>{
-    let expected
-    let actual
+  it('should calculate soft costs', ()=>{
+    let expected = 50000
+    let actual = utils.softCosts(property, units)
     expect(expected).toEqual(actual)
   })
 
