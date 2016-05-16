@@ -1,9 +1,9 @@
 export function landCostPerSF(p) {
-  return (p.landCost/p.landSF).toFixed(2)
+  return p.landCost/p.landSF
 }
 
-export function percentOfProjectLand(p){
-  p.landCost/exports.totalProjectCost(p)
+export function percentOfProjectLand(p, u){
+  return p.landCost/exports.totalProjectCost(p, u)
 }
 
 export function totalSF(u) {
@@ -13,49 +13,49 @@ export function totalSF(u) {
 }
 
 export function hardCosts(p, u){
-  return (p.hardCostsPerSF*exports.totalSF(u)).toFixed(2)
+  return p.hardCostsPerSF*exports.totalSF(u)
 }
 
-export function percentOfProjectHardCosts(p){
-  return exports.hardCosts(p)/exports.totalProjectCost(p)
+export function percentOfProjectHardCosts(p, u){
+  return exports.hardCosts(p, u)/exports.totalProjectCost(p, u)
 }
 
 export function softCosts(p, u){
   return p.softCostsPerSF*exports.totalSF(u)
 }
 
-export function percentOfProjectSoftCosts(p){
-  exports.softCosts(p)/exports.totalProjectCost(p)
+export function percentOfProjectSoftCosts(p, u){
+  return exports.softCosts(p, u)/exports.totalProjectCost(p, u)
 }
 
-export function hardSoftCosts(p){
-  exports.softCosts(p)+exports.hardCosts(p)
+export function hardSoftCosts(p, u){
+  return exports.softCosts(p, u)+exports.hardCosts(p, u)
 }
 
-export function totalProjectCost(p){
-  parseFloat(p.landCost)+parseFloat(exports.hardCosts(p))+parseFloat(exports.softCosts(p))
+export function totalProjectCost(p, u){
+  return parseFloat(p.landCost)+parseFloat(exports.hardCosts(p, u))+parseFloat(exports.softCosts(p, u))
 }
 
 export function rentMonthly(u){
   let totalRent = 0
-  for(let i=0;i<u.length; i++) totalRent += u[i].sf*u[i].rent
+  for(let i=0;i<u.length; i++) totalRent += u[i].SF*u[i].rentPerSF
   return totalRent;
 }
 
 export function rentAnnual(u){
-  exports.rentMonthly(u)*12
+  return exports.rentMonthly(u)*12
 }
 
 export function grossPotentialIncome(u){
-  exports.rentAnnual(u)
+  return exports.rentAnnual(u)
 }
 
 export function vacancyExpense(p, u){
-  -exports.grossPotentialIncome(u)*p.vacancyRate
+  return -exports.grossPotentialIncome(u)*p.vacancyRate
 }
 
 export function grossOperatingIncome(p, u){
-  exports.grossPotentialIncome(u)+exports.vacancyExpense(p, u)
+  return exports.grossPotentialIncome(u)+exports.vacancyExpense(p, u)
 }
 
 export function operatingExpense(p, u){
@@ -63,49 +63,49 @@ export function operatingExpense(p, u){
 }
 
 export function netOperatingIncome(p, u){
-  exports.grossOperatingIncome(p, u)+exports.operatingExpense(p, u)
+  return exports.grossOperatingIncome(p, u)+exports.operatingExpense(p, u)
 }
 
 export function cashReturn(p, u){
-  exports.netOperatingIncome(p, u)/exports.totalProjectCost(p)
+  return exports.netOperatingIncome(p, u)/exports.totalProjectCost(p, u)
 }
 
-export function downPayment(p){
-  exports.totalProjectCost(p)*p.downPaymentRate
+export function downPayment(p, u){
+  return exports.totalProjectCost(p, u)*p.downPaymentRate
 }
 
-export function debt(p){
-  exports.totalProjectCost(p)-exports.downPayment(p)
+export function debt(p, u){
+  return exports.totalProjectCost(p, u)-exports.downPayment(p, u)
 }
 
-export function debtPaymentMonthly(p){
-  let intr = p.loanRateAnnual/1200
-  let princ = exports.debt(p)
+export function debtPaymentMonthly(p, u){
+  let intr = p.loanRateAnnual/12
+  let princ = exports.debt(p, u)
   let term = p.loanTermYears*12
 
   return princ * intr / (1 - (Math.pow(1/(1 + intr), term)))
 }
 
-export function debtPaymentAnnual(p){
-  exports.debtPaymentMonthly(p)*12
+export function debtPaymentAnnual(p, u){
+  return exports.debtPaymentMonthly(p, u)*12
 }
 
 export function cashFlowMonthly(p, u){
-  exports.cashFlowAnnual(p, u)/12
+  return exports.cashFlowAnnual(p, u)/12
 }
 
 export function cashFlowAnnual(p, u){
-  exports.netOperatingIncome(p, u)-exports.debtPaymentAnnual(p)
+  return exports.netOperatingIncome(p, u)-exports.debtPaymentAnnual(p, u)
 }
 
-export function loanConstant(p){
-  exports.debtPaymentAnnual(p)/exports.debt(p)
+export function loanConstant(p, u){
+  return exports.debtPaymentAnnual(p, u)/exports.debt(p, u)
 }
 
 export function debtServiceCoverageRatio(p, u){
-  exports.netOperatingIncome(p, u)/exports.debtPaymentAnnual(p)
+  return exports.netOperatingIncome(p, u)/exports.debtPaymentAnnual(p, u)
 }
 
 export function preTaxReturnOnEquity(p, u){
-  exports.cashFlowAnnual(p, u)/exports.downPayment(p)
+  return exports.cashFlowAnnual(p, u)/exports.downPayment(p, u)
 }
