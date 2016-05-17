@@ -6,11 +6,65 @@ import * as actions from './index'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
-const middlewares = [ thunk ]
-const mockStore = configureMockStore(middlewares)
-
 
 describe('actions', ()=>{
+  it('should create an action to add a property', ()=>{
+    const expected = {
+      type: 'ADD_PROPERTY'
+    }
+    const actual = actions.addProperty()
+    expect(actual).toEqual(expected)
+  })
+
+  it('should create an action to update a property\'s value', ()=>{
+    const expected = {
+      type: 'UPDATE_PROPERTY',
+      payload: {
+        property_id: 5,
+        key: 'downPaymentRate',
+        value: .2
+      }
+    }
+    const actual = actions.updateProperty(5, 'downPaymentRate', .2)
+    expect(actual).toEqual(expected)
+  })
+
+  it('should create an action to delete property and it\s units', ()=>{
+    const middlewares = [ thunk ]
+    const mockStore = configureMockStore(middlewares)
+    const expectedActions = [
+      { type: 'DELETE_UNIT', payload: {unit_id: 3}},
+      { type: 'DELETE_UNIT', payload: {unit_id: 453}},
+      { type: 'DELETE_UNIT', payload: {unit_id: 133}},
+      { type: 'DELETE_UNIT', payload: {unit_id: 323}},
+      { type: 'DELETE_PROPERTY', payload: {property_id: 28} }
+    ]
+    const store = mockStore({})
+    const property_id = 28
+    const unit_ids = [3, 453, 133, 323]
+    store.dispatch(actions.deletePropertyAndUnits(property_id, unit_ids))
+    expect(store.getActions()).toEqual(expectedActions)
+  })
+
+  it('should create an action to delete a property', ()=>{
+    const expected = {
+      type: 'DELETE_PROPERTY',
+      payload: {
+        property_id: 3843
+      }
+    }
+    const actual = actions.deleteProperty(3843)
+    expect(actual).toEqual(expected)
+  })
+
+  it('should create an action to toggle showing deleted properties', ()=>{
+    const expected = {
+      type: 'TOGGLE_SHOW_DELETED_PROPERTIES'
+    }
+    const actual = actions.toggleShowDeletedProperties()
+    expect(actual).toEqual(expected)
+  })
+
   it('should create an action to show the add unit form', ()=>{
     const expected = {
       type: 'SHOW_ADD_UNIT_FORM'
@@ -56,6 +110,9 @@ describe('actions', ()=>{
   })
 
   it('should create an action that dispatch add unit and close/clear form', ()=>{
+    const middlewares = [ thunk ]
+    const mockStore = configureMockStore(middlewares)
+
     const expectedActions = [
       { type: 'ADD_UNIT', payload: {property_id: 5, rent: 1200, SF: 10000} },
       { type: 'CLOSE_ADD_UNIT_FORM' }

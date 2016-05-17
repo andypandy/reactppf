@@ -1,18 +1,37 @@
 import ReduxThunk from 'redux-thunk'
 
-export const addProperty = (property) => {
+export const addProperty = () => {
   return {
-    type: 'ADD_PROPERTY',
-    property
+    type: 'ADD_PROPERTY'
   }
 }
 
 export const updateProperty = (property_id, key, value) => {
   return {
     type: 'UPDATE_PROPERTY',
-    property_id,
-    key,
-    value
+    payload: {
+      property_id,
+      key,
+      value
+    }
+  }
+}
+
+export const deletePropertyAndUnits = (property_id, unit_ids) => {
+  return dispatch => {
+    unit_ids.forEach((unit_id)=>{
+      dispatch(exports.deleteUnit(unit_id))
+    })
+    dispatch(exports.deleteProperty(property_id))
+  }
+}
+
+export const deleteProperty = (property_id) =>{
+  return {
+    type: 'DELETE_PROPERTY',
+    payload: {
+      property_id
+    }
   }
 }
 
