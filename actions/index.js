@@ -21,10 +21,36 @@ export const toggleShowDeletedProperties = () => {
   }
 }
 
-export const addUnit = (property_id, unit) => {
+export const showAddUnitForm = () => {
   return {
-    type: 'ADD_UNIT',
-    property_id,
-    unit
+    type: 'SHOW_ADD_UNIT_FORM'
   }
 }
+
+export const closeAddUnitForm = ()=> {
+  return {
+    type: 'CLOSE_ADD_UNIT_FORM'
+  }
+}
+
+export const addUnit = (property_id, rent, SF) => {
+  return {
+    type: 'ADD_UNIT',
+    payload: {
+      property_id: property_id,
+      rent: rent,
+      SF: SF
+    }
+  }
+}
+
+export const deleteUnit = (unit_id)=>{
+  return {
+    type: 'DELETE_UNIT',
+    payload: {
+      unit_id: unit_id
+    }
+  }
+}
+
+
