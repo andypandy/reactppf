@@ -1,5 +1,6 @@
+import ReduxThunk from 'redux-thunk'
+
 export const addProperty = (property) => {
-  console.log('added property', property)
   return {
     type: 'ADD_PROPERTY',
     property
@@ -41,6 +42,13 @@ export const addUnit = (property_id, rent, SF) => {
       rent: rent,
       SF: SF
     }
+  }
+}
+
+export const addUnitThenClose = (property_id, rent, SF) => {
+  return dispatch => {
+    dispatch(exports.addUnit(property_id, rent, SF))
+    dispatch(exports.closeAddUnitForm())
   }
 }
 
