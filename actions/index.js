@@ -1,8 +1,26 @@
 import ReduxThunk from 'redux-thunk'
+import { push } from 'react-router-redux'
 
-export const addProperty = () => {
+//Random ID generator
+function makeId(){
+  return Math.random().toFixed(10).slice(-10)
+}
+
+export const addPropertyThenRedirect = ()=>{
+  return dispatch=>{
+    const property_id = makeId()
+    console.log(property_id)
+    dispatch(exports.addProperty(property_id))
+    dispatch(push('/property/' + property_id))
+  }
+}
+
+export const addProperty = (property_id) => {
   return {
-    type: 'ADD_PROPERTY'
+    type: 'ADD_PROPERTY',
+    payload: {
+      property_id
+    }
   }
 }
 

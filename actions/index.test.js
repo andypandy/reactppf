@@ -2,18 +2,30 @@ import 'babel-polyfill'
 import expect from 'expect'
 import * as actions from './index'
 
-
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
 
 describe('actions', ()=>{
+  it('should create an action to add a property then redirect to that property', ()=>{
+    const middlewares = [ thunk ]
+    const mockStore = configureMockStore(middlewares)
+
+    const store = mockStore({})
+    store.dispatch(actions.addPropertyThenRedirect())
+    const actualCompletedActions = store.getActions()
+    const actualAddPropertyAction = actualCompletedActions[0]
+    const actualRedirectAction = actualCompletedActions[1]
+
+    expect(actualAddPropertyAction.type).toEqual('ADD_PROPERTY')
+    expect(actualAddPropertyAction.payload.property_id).toNotBe(null)
+    expect(actualRedirectAction.payload.args[0]).toBe('/property/' + actualAddPropertyAction.payload.property_id)
+  })
+
   it('should create an action to add a property', ()=>{
-    const expected = {
-      type: 'ADD_PROPERTY'
-    }
     const actual = actions.addProperty()
-    expect(actual).toEqual(expected)
+    expect(actual.type).toEqual('ADD_PROPERTY')
+    expect(actual.payload.property_id).toNotBe(null)
   })
 
   it('should create an action to update a property\'s value', ()=>{
