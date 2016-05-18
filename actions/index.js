@@ -9,7 +9,6 @@ function makeId(){
 export const addPropertyThenRedirect = ()=>{
   return dispatch=>{
     const property_id = makeId()
-    console.log(property_id)
     dispatch(exports.addProperty(property_id))
     dispatch(push('/property/' + property_id))
   }
@@ -71,21 +70,34 @@ export const closeAddUnitForm = ()=> {
   }
 }
 
-export const addUnit = (property_id, rent, SF) => {
+export const addUnitThenClose = (property_id, rent, SF) => {
+  return dispatch => {
+    const unit_id = makeId()
+    dispatch(exports.addUnit(unit_id, property_id, rent, SF))
+    dispatch(exports.closeAddUnitForm())
+  }
+}
+
+export const addUnit = (unit_id, property_id, rent, SF) => {
   return {
     type: 'ADD_UNIT',
     payload: {
-      property_id: property_id,
-      rent: rent,
-      SF: SF
+      unit_id,
+      property_id,
+      rent,
+      SF
     }
   }
 }
 
-export const addUnitThenClose = (property_id, rent, SF) => {
-  return dispatch => {
-    dispatch(exports.addUnit(property_id, rent, SF))
-    dispatch(exports.closeAddUnitForm())
+export const updateUnit = (unit_id, key, value) => {
+  return {
+    type: 'UPDATE_UNIT',
+    payload: {
+      unit_id,
+      key,
+      value
+    }
   }
 }
 

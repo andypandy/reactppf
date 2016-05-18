@@ -97,15 +97,17 @@ describe('actions', ()=>{
     const expected = {
       type: 'ADD_UNIT',
       payload: {
+        unit_id: 4,
         property_id: 5,
         rent: 300,
         SF: 1234
       }
     }
+    const unit_id = 4
     const property_id = 5
     const rent = 300
     const SF = 1234
-    const actual = actions.addUnit(property_id, rent, SF)
+    const actual = actions.addUnit(unit_id, property_id, rent, SF)
     expect(actual).toEqual(expected)
 
   })
@@ -121,16 +123,34 @@ describe('actions', ()=>{
     expect(actual).toEqual(expected)
   })
 
+  it('should create an action to update a unit', ()=>{
+    const expected = {
+      type: 'UPDATE_UNIT',
+      payload: {
+        unit_id: 523,
+        key: 'rent',
+        value: 1450
+      }
+    }
+    const unit_id = 523
+    const key = 'rent'
+    const value = 1450
+    const actual = actions.updateUnit(unit_id, key, value)
+    expect(actual).toEqual(expected)
+  })
+
   it('should create an action that dispatch add unit and close/clear form', ()=>{
     const middlewares = [ thunk ]
     const mockStore = configureMockStore(middlewares)
 
     const expectedActions = [
-      { type: 'ADD_UNIT', payload: {property_id: 5, rent: 1200, SF: 10000} },
+      { type: 'ADD_UNIT'},
       { type: 'CLOSE_ADD_UNIT_FORM' }
     ]
     const store = mockStore({})
     store.dispatch(actions.addUnitThenClose(5, 1200, 10000))
-    expect(store.getActions()).toEqual(expectedActions)
+    const actualActions = store.getActions()
+    expect(actualActions[0].type).toEqual('ADD_UNIT')
+    expect(actualActions[1].type).toEqual('CLOSE_ADD_UNIT_FORM')
   })
 })
