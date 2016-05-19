@@ -13,10 +13,9 @@ import properties from './reducers/properties'
 import property_list from './reducers/property_list'
 import units from './reducers/units'
 
-//Containers & components
-import MainContainer from './containers/MainContainer'
+//Containers
+import IndexContainer from './containers/IndexContainer'
 import PropertyContainer from './containers/PropertyContainer'
-import AddPropertyContainer from './containers/AddPropertyContainer'
 
 // //Configure store
 const reducer = combineReducers({
@@ -32,10 +31,8 @@ const history = syncHistoryWithStore(browserHistory, store)
 render(
   <Provider store={store}>
     <Router>
-      <Route path="/" component={MainContainer} >
-        <Route path="/property/:property_id" component={PropertyContainer} />
-        <Route path="/addproperty" component={AddPropertyContainer} />
-      </Route>
+      <Route path="/" component={IndexContainer} />
+      <Route path="/property/:property_id" component={PropertyContainer} />
     </Router>
   </Provider>,
   document.getElementById('root')

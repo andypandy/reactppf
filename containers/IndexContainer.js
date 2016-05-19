@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {addProperty, toggleShowDeletedProperties} from '../actions'
-import Main from '../components/Main'
+import IndexComponent from '../components/IndexComponent'
 
 const mapStateToProps = (state) => {
   return {
@@ -23,9 +23,9 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const MainContainer = connect(
+const IndexContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Main)
+)(IndexComponent)
 
-export default MainContainer
+export default IndexContainer

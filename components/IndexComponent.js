@@ -1,16 +1,13 @@
 import React from 'react'
 var Link = require('react-router').Link
 import NavLinks from '../components/NavLinks'
+import WelcomeComponent from '../components/WelcomeComponent'
+import IndexListComponent from '../components/IndexListComponent'
 
-class Main extends React.Component {
+class IndexComponent extends React.Component {
   constructor(props) {
     super(props);
     console.log('props', props);
-  }
-
-  componentWillMount() {
-    console.log(arguments)
-    //This is where I fetch from server
   }
 
   handleChange(e) {
@@ -22,6 +19,11 @@ class Main extends React.Component {
     return (
       <div>
         <h1>Main component</h1>
+        {console.log(this.props.properties.length)}
+        { !this.props.properties.length ? <WelcomeComponent /> : <IndexListComponent properties={this.props.properties} /> }
+
+
+
 
         <div>
           {this.props.children}
@@ -55,4 +57,4 @@ class Main extends React.Component {
   }
 }
 
-export default Main
+export default IndexComponent
