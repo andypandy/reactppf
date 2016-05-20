@@ -2,7 +2,6 @@ import React from 'react'
 var Link = require('react-router').Link
 
 const IndexListComponent = ({properties}) => {
-  console.log('ilc props', properties)
 
   return (
     <div>
