@@ -7,7 +7,7 @@ import IndexListComponent from '../components/IndexListComponent'
 class IndexComponent extends React.Component {
   constructor(props) {
     super(props);
-    console.log('props', props);
+    //console.log('props', props);
   }
 
   handleChange(e) {
@@ -19,9 +19,13 @@ class IndexComponent extends React.Component {
     return (
       <div>
         <h1>Main component</h1>
-        {console.log(this.props.properties.length)}
+        
         { !this.props.properties.length ? <WelcomeComponent /> : <IndexListComponent properties={this.props.properties} /> }
-
+        
+        <a onClick={(e)=>{
+          e.preventDefault()
+          this.props.handleAddPropertyClick()
+        }}>Add property</a>
 
 
 

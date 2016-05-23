@@ -8,7 +8,7 @@ const IndexListComponent = ({properties}) => {
       <p>Welcome back.</p>
       <ul>
         {properties.map((property)=>
-          <li key={property.property_id}><Link to={`/property/${property.property_id}`}>{property.name}</Link></li>
+          <li className="listed_property" key={property.property_id}><Link to={`/property/${property.property_id}`}>{property.name}</Link></li>
         )}
       </ul>
     </div>

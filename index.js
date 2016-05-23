@@ -10,7 +10,7 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 //Reducers
 import properties from './reducers/properties'
-import property_list from './reducers/property_list'
+import propertyList from './reducers/propertyList'
 import units from './reducers/units'
 
 //Containers
@@ -21,7 +21,7 @@ import PropertyContainer from './containers/PropertyContainer'
 const reducer = combineReducers({
   properties,
   units,
-  property_list,
+  propertyList,
   routing: routerReducer
 })
 const store = createStore(reducer, applyMiddleware(thunk))

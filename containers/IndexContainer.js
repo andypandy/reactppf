@@ -5,7 +5,7 @@ import IndexComponent from '../components/IndexComponent'
 
 const mapStateToProps = (state) => {
   return {
-    show_deleted_properties: state.property_list.show_deleted_properties,
+    showDeletedProperties: state.propertyList.showDeletedProperties,
     properties: state.properties,
     units: state.units
   }
