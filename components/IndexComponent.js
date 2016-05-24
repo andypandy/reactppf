@@ -1,6 +1,4 @@
 import React from 'react'
-var Link = require('react-router').Link
-import NavLinks from '../components/NavLinks'
 import WelcomeComponent from '../components/WelcomeComponent'
 import IndexListComponent from '../components/IndexListComponent'
 

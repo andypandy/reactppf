@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {updateProperty} from '../actions'
-import Property from '../components/Property'
+import PropertyComponent from '../components/PropertyComponent'
 
 const getCurrentProperty = (properties, property_id)=> {
   return properties.filter((property)=>
@@ -43,6 +43,6 @@ const mapDispatchToProps = (dispatch) => {
 const PropertyContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Property)
+)(PropertyComponent)
 
 export default PropertyContainer
