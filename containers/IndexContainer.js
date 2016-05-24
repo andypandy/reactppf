@@ -16,10 +16,10 @@ const mapDispatchToProps = (dispatch) => {
     handleAddPropertyClick: ()=>{
       dispatch(addPropertyThenRedirect())
     },
-    handleDeletePropertyClick = (property_id) => {
+    handleDeletePropertyClick: (property_id) => {
       dispatch(deletePropertyAndUnits(property_id))
     },
-    handleToggleShowDeletedPropertiesClick = () => {
+    handleToggleShowDeletedPropertiesClick: () => {
       dispatch(toggleShowDeletedProperties())
     }
   }

@@ -1,11 +1,12 @@
 import 'babel-polyfill'
 import expect from 'expect'
 import reducer from './properties'
+import actions from '../actions/index'
 
-describe('properties reducer', ()=>{
+describe('reducers/properties', ()=>{
   it('should handle adding a property', ()=>{
-    let expected = [{property_id:1}]
-    let actual = reducer([], {
+    const expected = [{property_id:1}]
+    const actual = reducer([], {
       type: 'ADD_PROPERTY',
       property: {
         property_id: 1

@@ -16,11 +16,8 @@ const getUnitsForProperty = (units, property) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log('state', state);
-  let currentProperty = getCurrentProperty(state.properties, ownProps.routeParams.property_id)
-  let currentUnits = getUnitsForProperty(state.units, currentProperty)
-
-  console.log('units', currentUnits)
+  const currentProperty = getCurrentProperty(state.properties, ownProps.routeParams.property_id)
+  const currentUnits = getUnitsForProperty(state.units, currentProperty)
 
   return {
     property: currentProperty,
@@ -30,13 +27,23 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handlePropertyInputChange: (property_id, key, value) => {
+    handleUpdateProperty: (property_id, key, value) => {
       dispatch(updateProperty(property_id, key, value))
     },
+    handleDeleteProperty: (property_id, unit_ids) => {
+      dispatch(deletePropertyAndUnits(property_id, unit_ids))
+      //Redirect to homepage
+    },
 
-    handleAddUnitFormSubmit: (property_id, unit) => {
-      dispatch(addUnit(property_id, unit))
-    }
+    handleShowAddUnitForm: ()=>{},
+    handleCloseAddUnitForm: ()=>{},
+
+    handleAddUnit: (property_id, unit) => {
+      dispatch(addUnitAndClose(property_id, unit))
+    },
+
+    handleDeleteUnit: (unit_id)=>{},
+    handleUpdateUnit: (unit_id, key, value)=>{},
   }
 }
 
