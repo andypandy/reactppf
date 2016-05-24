@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addProperty, toggleShowDeletedProperties} from '../actions'
+import {addPropertyThenRedirect, deletePropertyAndUnits} from '../actions'
 import IndexComponent from '../components/IndexComponent'
 
 const mapStateToProps = (state) => {
@@ -13,11 +13,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleAddPropertyFormSubmit: (property) => {
-      console.log('add property')
-      dispatch(addProperty(property))
+    handleAddPropertyClick: ()=>{
+      dispatch(addPropertyThenRedirect())
     },
-    handleToggleShowDeletedProperties: () => {
+    handleDeletePropertyClick = (property_id) => {
+      dispatch(deletePropertyAndUnits(property_id))
+    },
+    handleToggleShowDeletedPropertiesClick = () => {
       dispatch(toggleShowDeletedProperties())
     }
   }

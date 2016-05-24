@@ -1,15 +1,13 @@
 import React from 'react'
 
-const WelcomeComponent = () => {
+const WelcomeComponent = ({handleAddPropertyClick}) => {
   return (
     <div>
       <p>Welcome message</p>
-      <a href="#" onClick={(e)=>{
+      <a id="add_property" onClick={(e)=>{
         e.preventDefault()
-        //props.handleAddPropertyClick()
-      }}>
-        Add a property
-      </a>
+        handleAddPropertyClick()
+      }}>Add property</a>
     </div>
   )
 }

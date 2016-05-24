@@ -10,5 +10,15 @@ describe('components/IndexListComponent', ()=>{
     expect(wrapper.find('li .listed_property').length).toEqual(3)
   })
 
-  it('should handle clicking "add new property" link')
+  it('should handle clicking "add new property" link', ()=>{
+    const properties = [{property_id: 182736}]
+    const handleAddPropertyClick = expect.createSpy()
+    const wrapper = shallow(<IndexListComponent 
+      properties={properties} 
+      handleAddPropertyClick={handleAddPropertyClick} 
+    />)
+    wrapper.find('#add_property').simulate('click', {preventDefault: ()=>{}})
+    expect(handleAddPropertyClick).toHaveBeenCalled()
+  })
+
 })

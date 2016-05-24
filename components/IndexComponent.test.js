@@ -25,6 +25,7 @@ describe('components/IndexComponent', ()=>{
     expect(wrapper.props().hasOwnProperty('handleAddPropertyClick')).toEqual(true)
     expect(wrapper.props().hasOwnProperty('handleDeletePropertyClick')).toEqual(true)
   })
+
   it('should show welcome message if there aren\'t any properties', ()=>{    
     const showDeletedProperties = false
     const properties = []
@@ -38,8 +39,9 @@ describe('components/IndexComponent', ()=>{
       handleAddPropertyClick={handleAddPropertyClick} 
       handleDeletePropertyClick={handleDeletePropertyClick} 
     />)
-    expect(wrapper.contains(<WelcomeComponent />)).toEqual(true)
+    expect(wrapper.contains(<WelcomeComponent handleAddPropertyClick={handleAddPropertyClick} />)).toEqual(true)
   })
+
   it('should show list of properties if there are properties', ()=>{
     const showDeletedProperties = false
     const properties = [{property_id: 182736}]
@@ -53,8 +55,9 @@ describe('components/IndexComponent', ()=>{
       handleAddPropertyClick={handleAddPropertyClick} 
       handleDeletePropertyClick={handleDeletePropertyClick} 
     />)
-    expect(wrapper.contains(<IndexListComponent properties={properties} />)).toEqual(true)
+    expect(wrapper.contains(<IndexListComponent properties={properties} handleAddPropertyClick={handleAddPropertyClick} />)).toEqual(true)
   })
+
   it('should handle clicking "add new property" link', ()=>{
     const showDeletedProperties = false
     const properties = [{property_id: 182736}]
@@ -71,4 +74,7 @@ describe('components/IndexComponent', ()=>{
     wrapper.find('a').simulate('click', {preventDefault: ()=>{}})
     expect(handleAddPropertyClick).toHaveBeenCalled()
   })
+
+  it('should hide deleted properties by default')
+  it('should show toggle deleted properties visible')
 })
