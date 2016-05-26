@@ -20,6 +20,7 @@ const mapStateToProps = (state, ownProps) => {
   const currentUnits = getUnitsForProperty(state.units, currentProperty)
 
   return {
+    ui: state.ui,
     property: currentProperty,
     units: currentUnits
   }
