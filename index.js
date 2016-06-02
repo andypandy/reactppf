@@ -10,6 +10,7 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 //Reducers
 import ui from './reducers/ui'
+import forms from './reducers/forms'
 import properties from './reducers/properties'
 import propertyList from './reducers/propertyList'
 import units from './reducers/units'
@@ -21,6 +22,7 @@ import PropertyContainer from './containers/PropertyContainer'
 // //Configure store
 const reducer = combineReducers({
   ui, 
+  forms, 
   properties,
   units,
   propertyList,

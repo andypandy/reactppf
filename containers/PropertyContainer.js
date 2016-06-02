@@ -20,6 +20,7 @@ const mapStateToProps = (state, ownProps) => {
   const currentUnits = getUnitsForProperty(state.units, currentProperty)
 
   return {
+    forms: state.forms, 
     ui: state.ui,
     property: currentProperty,
     units: currentUnits
@@ -40,8 +41,11 @@ const mapDispatchToProps = (dispatch) => {
     handleCloseAddUnitForm: ()=>{},
 
     handleAddUnit: (property_id, unit) => {
-      dispatch(addUnitAndClose(property_id, unit))
+      dispatch(addUnitThenClose(property_id, unit))
     },
+
+    handleUpdateAddUnitForm: ()=>{},
+    handleClearAddUnitForm: ()=>{},
 
     handleDeleteUnit: (unit_id)=>{},
     handleUpdateUnit: (unit_id, key, value)=>{},

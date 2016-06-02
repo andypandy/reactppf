@@ -1,58 +1,57 @@
 import React from 'react'
 import * as utils from '../utilities/utilities'
 
-const PropertyComponent = (
-  property, 
-  units, 
-  handleUpdateProperty, 
-  handleDeleteProperty,
-  handleShowAddUnitForm,
-  handleCloseAddUnitForm,
-  handleAddUnit,
-  handleDeleteUnit,
-  handleUpdateUnit)=>{
-
+const PropertyComponent = (props)=>{
   return (
     <div>
       <div>list of other properties</div>
 
       <div>
         <label>Land cost</label>
-        <input onChange={(e)=>{
-          handleUpdateProperty(property.property_id, 'landCost', e.target.value)
+        <input id="landCost" onChange={(e)=>{
+          props.handleUpdateProperty(props.property.property_id, 'landCost', e.target.value)
         }} />
       </div>
 
       <div>
-        <p className{units.length ? 'hidden' : ''}>No units added</p>
+        <p className={props.units.length ? 'hidden' : ''}>No units added</p>
         <ul>
-          {units.map((unit)=>{
+          {props.units.map((unit)=>{
             return (
-              <li key={unit.unit_id}>
+              <li className="unit" key={unit.unit_id}>
                 Rent: <input onChange={(e)=>{
-                  handleUpdateUnit(unit.unit_id, 'rent', e.target.value)
+                  props.handleUpdateUnit(unit.unit_id, 'rent', e.target.value)
                 }} value={unit.rent}/>
                 SF: <input onChange={(e)=>{
-                  handleUpdateUnit(unit.unit_id, 'rent', e.target.value)
+                  props.handleUpdateUnit(unit.unit_id, 'rent', e.target.value)
                 }} value={unit.rent}/>
               </li>
             )
           })}
         </ul>
 
-        <a onClick={(e)=>{
+        <a id="showAddUnitFormButton" onClick={(e)=>{
           e.preventDefault()
-          handleShowAddUnitForm()
+          props.handleShowAddUnitForm()
         }}>Add a unit</a>
       </div>
 
-      <div id="add_unit_form" className={uiState.showAddUnitForm ? '' : 'hidden'}>
-        Rent
-        SF
-        <a onClick={(e)=>{
+      <div id="addUnitForm" className={props.ui.showAddUnitForm ? '' : 'hidden'}>
+        <form onSubmit={(e)=>{
           e.preventDefault()
-          handleCloseAddUnitForm()
-        }}>Cancel</a>
+          console.log(e.target)
+          props.handleAddUnitForm()
+        }}>
+          Rent
+          SF 
+          <label>Square feet of unit</label>
+          <input name="sf" />
+          <a onClick={(e)=>{
+            e.preventDefault()
+            props.handleCloseAddUnitForm()
+          }}>Cancel</a>
+          <input type="submit" value="Add unit" />
+        </form>
       </div>
 
       <div>Delete property button</div>
