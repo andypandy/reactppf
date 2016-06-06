@@ -45,10 +45,10 @@ describe('actions', ()=>{
     const middlewares = [ thunk ]
     const mockStore = configureMockStore(middlewares)
     const expectedActions = [
-      { type: 'DELETE_UNIT', payload: {unit_id: 3}},
-      { type: 'DELETE_UNIT', payload: {unit_id: 453}},
-      { type: 'DELETE_UNIT', payload: {unit_id: 133}},
-      { type: 'DELETE_UNIT', payload: {unit_id: 323}},
+      { type: 'DELETE_UNIT', payload: {property_id: 28, unit_id: 3}},
+      { type: 'DELETE_UNIT', payload: {property_id: 28, unit_id: 453}},
+      { type: 'DELETE_UNIT', payload: {property_id: 28, unit_id: 133}},
+      { type: 'DELETE_UNIT', payload: {property_id: 28, unit_id: 323}},
       { type: 'DELETE_PROPERTY', payload: {property_id: 28} }
     ]
     const store = mockStore({})
@@ -128,11 +128,13 @@ describe('actions', ()=>{
     const expected = {
       type: 'DELETE_UNIT',
       payload: {
+        property_id: 24,
         unit_id: 5
       }
     }
+    const property_id = 24
     const unit_id = 5
-    const actual = actions.deleteUnit(unit_id)
+    const actual = actions.deleteUnit(property_id, unit_id)
     expect(actual).toEqual(expected)
   })
 

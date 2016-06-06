@@ -2,6 +2,8 @@ import React from 'react'
 import * as utils from '../utilities/utilities'
 
 const PropertyComponent = (props)=>{
+  //console.log('props', props)
+
   return (
     <div>
       <div>list of other properties</div>
@@ -24,10 +26,10 @@ const PropertyComponent = (props)=>{
                 }} value={unit.rent}/>
                 SF: <input onChange={(e)=>{
                   props.handleUpdateUnit(unit.unit_id, 'SF', e.target.value)
-                }} value={unit.rent}/> 
+                }} value={unit.SF}/> 
                 <a className="deleteUnitButton" onClick={(e)=>{
                   e.preventDefault()
-                  props.handleDeleteUnit(unit.unit_id)
+                  props.handleDeleteUnit(props.property.property_id, unit.unit_id)
                 }}>Delete</a>
               </li>
             )
@@ -51,6 +53,7 @@ const PropertyComponent = (props)=>{
         }} />
         <a id="addUnitButton" onClick={(e)=>{
           e.preventDefault()
+          console.log('forms', props.forms)
           props.handleAddUnit(props.property.property_id, props.forms.rent, props.forms.SF)
         }}>Add</a> | 
         <a id="closeAddUnitForm" onClick={(e)=>{

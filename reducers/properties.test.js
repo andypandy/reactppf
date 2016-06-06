@@ -39,22 +39,28 @@ describe('reducers/properties', ()=>{
   })
 
   it('should add a unit\'s id to a property', ()=>{
-    let initialState = [{property_id: 234, units: [4]}]
-    let expected = [{property_id: 234, units: [4, 5]}]
-    let actual = reducer(initialState, {
+    const initialState = [{property_id: 234, units: [4]}]
+    const expected = [{property_id: 234, units: [4, 5]}]
+    const actual = reducer(initialState, {
       type: 'ADD_UNIT',
-      property_id: 234,
-      unit_id: 5
+      payload: {
+        property_id: 234,
+        unit_id: 5
+      }
     })
+    expect(actual).toEqual(expected)
   })
 
   it('should delete a unit\'s id from a property', ()=>{
-    let initialState = [{property_id: 234, units: [4, 5]}]
-    let expected = [{property_id: 234, units: [5]}]
-    let actual = reducer(initialState, {
+    const initialState = [{property_id: 234, units: [4, 5]}]
+    const expected = [{property_id: 234, units: [5]}]
+    const actual = reducer(initialState, {
       type: 'DELETE_UNIT',
-      property_id: 234,
-      unit_id: 4
+      payload: {
+        property_id: 234,
+        unit_id: 4
+      }
     })
+    expect(actual).toEqual(expected)
   })
 })

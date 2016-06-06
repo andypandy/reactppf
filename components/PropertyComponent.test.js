@@ -76,10 +76,11 @@ describe('components/PropertyComponent', ()=>{
   })
   it('should handle deleting a unit', ()=>{
     props.handleDeleteUnit = expect.createSpy()
+    props.property.property_id = 123
     props.units = [{unit_id: 5}, {unit_id: 23}, {unit_id: 43}]
     const wrapper = shallow(<PropertyComponent {...props} />)
     wrapper.find('.deleteUnitButton').first().simulate('click', {preventDefault:()=>{}})
-    expect(props.handleDeleteUnit).toHaveBeenCalledWith(5)
+    expect(props.handleDeleteUnit).toHaveBeenCalledWith(123, 5)
   })
   it('should handle updating a unit\'s value', ()=>{
     props.handleUpdateUnit = expect.createSpy()

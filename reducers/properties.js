@@ -41,20 +41,23 @@ const properties = (state = initialState, action) => {
 
     case 'ADD_UNIT':
       return state.map((property) => {
-        if(property.property_id == action.property_id) {
-          property.units.push(action.unit_id)
+        if(property.property_id == action.payload.property_id) {
+          property.units.push(action.payload.unit_id)
           return property
         }
+        return property
       })
-      return property
+      //return property
 
     case 'DELETE_UNIT':
       return state.map((property)=>{
-        if(property.property_id == action.property_id) {
+        if(property.property_id == action.payload.property_id) {
           property.units = property.units.filter((unit_id)=>{
-            return unit_id != action.unit_id
+            return unit_id != action.payload.unit_id
           })
+          return property
         }
+        return property
       })
 
     default:

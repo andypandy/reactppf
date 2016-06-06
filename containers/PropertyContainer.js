@@ -60,8 +60,8 @@ const mapDispatchToProps = (dispatch) => {
     handleAddUnit: (property_id, rent, SF) => {
       dispatch(addUnitThenClose(property_id, rent, SF))
     },
-    handleDeleteUnit: (unit_id)=>{
-      dispatch(deleteUnit(unit_id))
+    handleDeleteUnit: (property_id, unit_id)=>{
+      dispatch(deleteUnit(property_id, unit_id))
     },
     handleUpdateUnit: (unit_id, key, value)=>{
       dispatch(updateUnit(unit_id, key, value))

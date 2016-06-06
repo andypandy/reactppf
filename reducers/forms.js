@@ -8,7 +8,7 @@ const initialState = {
 const forms = (state = initialState, action)=>{
   switch(action.type) {
     case 'UPDATE_ADD_UNIT_FORM':
-      return Object.assign({}, initialState, {
+      return Object.assign({}, state, {
         [action.payload.key]: action.payload.value
       })
     case 'CLOSE_ADD_UNIT_FORM':

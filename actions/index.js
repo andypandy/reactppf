@@ -37,7 +37,7 @@ export const updateProperty = (property_id, key, value) => {
 export const deletePropertyAndUnits = (property_id, unit_ids) => {
   return dispatch => {
     unit_ids.forEach((unit_id)=>{
-      dispatch(exports.deleteUnit(unit_id))
+      dispatch(exports.deleteUnit(property_id, unit_id))
     })
     dispatch(exports.deleteProperty(property_id))
   }
@@ -111,10 +111,11 @@ export const updateUnit = (unit_id, key, value) => {
   }
 }
 
-export const deleteUnit = (unit_id)=>{
+export const deleteUnit = (property_id, unit_id)=>{
   return {
     type: 'DELETE_UNIT',
     payload: {
+      property_id, 
       unit_id
     }
   }
