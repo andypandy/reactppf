@@ -19,6 +19,8 @@ import units from './reducers/units'
 import IndexContainer from './containers/IndexContainer'
 import PropertyContainer from './containers/PropertyContainer'
 
+import css from './css/style.css'
+
 // //Configure store
 const reducer = combineReducers({
   ui, 

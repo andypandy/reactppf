@@ -24,6 +24,9 @@ module.exports = {
         loader: 'babel?presets[]=es2015',
         exclude: /node_modules/,
         include: __dirname
+      },
+      { test: /\.css$/, 
+        loader: "style-loader!css-loader" 
       }
     ]
   }
