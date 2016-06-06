@@ -1,6 +1,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {updateProperty} from '../actions'
+import {push} from 'react-router-redux'
+import {
+  updateProperty, 
+  deleteProperty,
+  showAddUnitForm,
+  updateAddUnitForm, 
+  closeAddUnitForm, 
+  addUnitThenClose, 
+  deleteUnit, 
+  updateUnit
+} from '../actions'
 import PropertyComponent from '../components/PropertyComponent'
 
 const getCurrentProperty = (properties, property_id)=> {
@@ -34,21 +44,28 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleDeleteProperty: (property_id, unit_ids) => {
       dispatch(deletePropertyAndUnits(property_id, unit_ids))
-      //Redirect to homepage
+      dispatch(push('/'))
     },
 
-    handleShowAddUnitForm: ()=>{},
-    handleCloseAddUnitForm: ()=>{},
-
-    handleAddUnit: (property_id, unit) => {
-      dispatch(addUnitThenClose(property_id, unit))
+    handleShowAddUnitForm: ()=>{
+      dispatch(showAddUnitForm())
+    },
+    handleUpdateAddUnitForm: (key, value)=>{
+      dispatch(updateAddUnitForm(key, value))
+    },
+    handleCloseAddUnitForm: ()=>{
+      dispatch(closeAddUnitForm())
     },
 
-    handleUpdateAddUnitForm: ()=>{},
-    handleClearAddUnitForm: ()=>{},
-
-    handleDeleteUnit: (unit_id)=>{},
-    handleUpdateUnit: (unit_id, key, value)=>{},
+    handleAddUnit: (property_id, rent, SF) => {
+      dispatch(addUnitThenClose(property_id, rent, SF))
+    },
+    handleDeleteUnit: (unit_id)=>{
+      dispatch(deleteUnit(unit_id))
+    },
+    handleUpdateUnit: (unit_id, key, value)=>{
+      dispatch(updateUnit(unit_id, key, value))
+    },
   }
 }
 

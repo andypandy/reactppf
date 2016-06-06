@@ -93,6 +93,19 @@ describe('actions', ()=>{
     expect(actual).toEqual(expected)
   })
 
+  it('should create an action to update the add unit form', ()=>{
+    const expected = {
+      type: 'UPDATE_ADD_UNIT_FORM',
+      payload: {
+        key: 'rent',
+        value: 500
+      }
+    }
+    const actual = actions.updateAddUnitForm('rent', 500)
+    expect(actual).toEqual(expected)
+    
+  })
+
   it('should create an action to add a unit', ()=>{
     const expected = {
       type: 'ADD_UNIT',

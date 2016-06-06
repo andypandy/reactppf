@@ -12,12 +12,12 @@ describe('reducers/ui', ()=>{
     expect(actual).toEqual(expected)
   })
 
-  it('should hide add unit form', ()=>{
+  it('should close add unit form', ()=>{
     const initialState = {
       showAddUnitForm: true
     }
     const expected = {showAddUnitForm: false}
-    const actual = reducer(initialState, {type: 'HIDE_ADD_UNIT_FORM'})
+    const actual = reducer(initialState, {type: 'CLOSE_ADD_UNIT_FORM'})
     expect(actual).toEqual(expected)
   })
 })

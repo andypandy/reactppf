@@ -1,5 +1,5 @@
 import ReduxThunk from 'redux-thunk'
-import { push } from 'react-router-redux'
+import {push} from 'react-router-redux'
 
 //Random ID generator
 function makeId(){
@@ -70,6 +70,16 @@ export const closeAddUnitForm = ()=> {
   }
 }
 
+export const updateAddUnitForm = (key, value) => {
+  return {
+    type: 'UPDATE_ADD_UNIT_FORM',
+    payload: {
+      key,
+      value
+    }
+  }
+}
+
 export const addUnitThenClose = (property_id, rent, SF) => {
   return dispatch => {
     const unit_id = makeId()
@@ -105,7 +115,7 @@ export const deleteUnit = (unit_id)=>{
   return {
     type: 'DELETE_UNIT',
     payload: {
-      unit_id: unit_id
+      unit_id
     }
   }
 }

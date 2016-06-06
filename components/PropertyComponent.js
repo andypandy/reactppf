@@ -23,8 +23,12 @@ const PropertyComponent = (props)=>{
                   props.handleUpdateUnit(unit.unit_id, 'rent', e.target.value)
                 }} value={unit.rent}/>
                 SF: <input onChange={(e)=>{
-                  props.handleUpdateUnit(unit.unit_id, 'rent', e.target.value)
-                }} value={unit.rent}/>
+                  props.handleUpdateUnit(unit.unit_id, 'SF', e.target.value)
+                }} value={unit.rent}/> 
+                <a className="deleteUnitButton" onClick={(e)=>{
+                  e.preventDefault()
+                  props.handleDeleteUnit(unit.unit_id)
+                }}>Delete</a>
               </li>
             )
           })}
@@ -36,22 +40,23 @@ const PropertyComponent = (props)=>{
         }}>Add a unit</a>
       </div>
 
-      <div id="addUnitForm" className={props.ui.showAddUnitForm ? '' : 'hidden'}>
-        <form onSubmit={(e)=>{
+      <div id="addUnitFormContainer" className={props.ui.showAddUnitForm ? '' : 'hidden'}>
+        <label>Unit's monthly rent</label>
+        <input id="addUnitFormRent" name="rent" onChange={(e)=>{
+          props.handleUpdateAddUnitForm('rent', e.target.value)
+        }} />
+        <label>Square feet of unit</label>
+        <input id="addUnitFormSF" name="SF" onChange={(e)=>{
+          props.handleUpdateAddUnitForm('SF', e.target.value)
+        }} />
+        <a id="addUnitButton" onClick={(e)=>{
           e.preventDefault()
-          console.log(e.target)
-          props.handleAddUnitForm()
-        }}>
-          Rent
-          SF 
-          <label>Square feet of unit</label>
-          <input name="sf" />
-          <a onClick={(e)=>{
-            e.preventDefault()
-            props.handleCloseAddUnitForm()
-          }}>Cancel</a>
-          <input type="submit" value="Add unit" />
-        </form>
+          props.handleAddUnit(props.property.property_id, props.forms.rent, props.forms.SF)
+        }}>Add</a> | 
+        <a id="closeAddUnitForm" onClick={(e)=>{
+          e.preventDefault()
+          props.handleCloseAddUnitForm()
+        }}>Cancel</a>
       </div>
 
       <div>Delete property button</div>
