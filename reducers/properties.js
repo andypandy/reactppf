@@ -22,7 +22,22 @@ const initialState = [{
 const properties = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_PROPERTY':
-      return state.concat(action.property)
+      return state.concat({
+        property_id: action.payload.property_id, 
+        name:'New property',
+        landCost: null,
+        landSF: null,
+        sf: null,
+        rentPerSFMonthly: null,
+        hardCostsPerSF: null,
+        softCostsPerSF: null,
+        vacancyRate: null,
+        operatingExpenseRate: null,
+        downPaymentRate: null,
+        loanTermYears: null,
+        loanRateAnnual: null,
+        units: []
+      })
 
     case 'UPDATE_PROPERTY':
       return state.map((property) => {
@@ -36,7 +51,7 @@ const properties = (state = initialState, action) => {
 
     case 'DELETE_PROPERTY':
       return state.filter((property)=>{
-        return property.property_id != action.property_id
+        return property.property_id != action.payload.property_id
       })
 
     case 'ADD_UNIT':
@@ -47,7 +62,6 @@ const properties = (state = initialState, action) => {
         }
         return property
       })
-      //return property
 
     case 'DELETE_UNIT':
       return state.map((property)=>{

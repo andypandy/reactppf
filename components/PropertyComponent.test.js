@@ -89,4 +89,5 @@ describe('components/PropertyComponent', ()=>{
     wrapper.find('.unit').first().find('input').first().simulate('change', {target:{value: 400}})
     expect(props.handleUpdateUnit).toHaveBeenCalledWith(5, 'rent', 400)
   }) 
+  it('should handle deleting a property')
 })

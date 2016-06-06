@@ -6,7 +6,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
 import { Router, Route, browserHistory } from 'react-router'
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux'
 
 //Reducers
 import ui from './reducers/ui'
@@ -30,13 +30,17 @@ const reducer = combineReducers({
   propertyList,
   routing: routerReducer
 })
-const store = createStore(reducer, applyMiddleware(thunk))
+const store = createStore(
+  reducer, 
+  applyMiddleware(thunk),
+  applyMiddleware(routerMiddleware(browserHistory))
+)
 
 const history = syncHistoryWithStore(browserHistory, store)
 
 render(
   <Provider store={store}>
-    <Router>
+    <Router history={history}>
       <Route path="/" component={IndexContainer} />
       <Route path="/property/:property_id" component={PropertyContainer} />
     </Router>

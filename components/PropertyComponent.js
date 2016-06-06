@@ -44,11 +44,11 @@ const PropertyComponent = (props)=>{
 
       <div id="addUnitFormContainer" className={props.ui.showAddUnitForm ? '' : 'hidden'}>
         <label>Unit's monthly rent</label>
-        <input id="addUnitFormRent" name="rent" onChange={(e)=>{
+        <input id="addUnitFormRent" value={props.forms.rent} name="rent" onChange={(e)=>{
           props.handleUpdateAddUnitForm('rent', e.target.value)
         }} />
         <label>Square feet of unit</label>
-        <input id="addUnitFormSF" name="SF" onChange={(e)=>{
+        <input id="addUnitFormSF" value={props.forms.SF} name="SF" onChange={(e)=>{
           props.handleUpdateAddUnitForm('SF', e.target.value)
         }} />
         <a id="addUnitButton" onClick={(e)=>{
@@ -62,7 +62,12 @@ const PropertyComponent = (props)=>{
         }}>Cancel</a>
       </div>
 
-      <div>Delete property button</div>
+      <div>
+        <a onClick={(e)=>{
+          e.preventDefault()
+          props.handleDeleteProperty(props.property.property_id, props.property.units)
+        }}>Delete property button</a>
+      </div>
 
     </div>
   )
