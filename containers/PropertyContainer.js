@@ -57,8 +57,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(closeAddUnitForm())
     },
 
-    handleAddUnit: (property_id, rent, SF) => {
-      dispatch(addUnitThenClose(property_id, rent, SF))
+    handleAddUnit: (property_id, name, rent, SF) => {
+      dispatch(addUnitThenClose(property_id, name, rent, SF))
     },
     handleDeleteUnit: (property_id, unit_id)=>{
       dispatch(deleteUnit(property_id, unit_id))

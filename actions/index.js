@@ -80,20 +80,21 @@ export const updateAddUnitForm = (key, value) => {
   }
 }
 
-export const addUnitThenClose = (property_id, rent, SF) => {
+export const addUnitThenClose = (property_id, name, rent, SF) => {
   return dispatch => {
     const unit_id = makeId()
-    dispatch(exports.addUnit(unit_id, property_id, rent, SF))
+    dispatch(exports.addUnit(unit_id, property_id, name, rent, SF))
     dispatch(exports.closeAddUnitForm())
   }
 }
 
-export const addUnit = (unit_id, property_id, rent, SF) => {
+export const addUnit = (unit_id, property_id, name, rent, SF) => {
   return {
     type: 'ADD_UNIT',
     payload: {
       unit_id,
       property_id,
+      name,
       rent,
       SF
     }

@@ -1,6 +1,7 @@
 import actions from '../actions'
 
 const initialState = {
+  name: null,
   rent: null,
   SF: null
 }

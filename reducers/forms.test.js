@@ -16,8 +16,8 @@ describe('reducers/add unit form', ()=>{
     expect(actual).toEqual(expected)
   })
   it('should clear add unit form', ()=>{
-    const expected = {rent: null, SF: null}
-    const initialState = {rent: 5, SF: 123}
+    const expected = {name: null, rent: null, SF: null}
+    const initialState = {name: 'Residential', rent: 5, SF: 123}
     const actual = reducer(initialState, {type:'CLOSE_ADD_UNIT_FORM'})
     expect(actual).toEqual(expected)
   })
