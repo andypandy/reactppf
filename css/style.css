@@ -1,2 +1,163 @@
-* {font-family: 'PT Sans';}
+*, input {font-family: 'Lato'; font-size: 14px;}
+
+a {
+  color: #1C75BC;
+  text-decoration: underline;
+}
+
+h2 {
+  font-size: 35px;
+  color: #414042;
+  font-weight: normal;
+  font-weight: 500;
+}
+
+#root {width: 600px; margin: 0 auto;}
+
 .hidden {display: none;}
+
+.clearFix {
+  clear: both;
+}
+
+h2 {
+  margin-top: 75px;
+}
+
+.red-link {
+  color: #BE1E2D;
+  text-decoration: underline;
+}
+
+.negative {
+  color: #BE1E2D;
+}
+
+.two-column input {
+  text-align: right;
+  padding-right: 5px;
+  width: auto;
+}
+
+table {width: 100%;}
+
+th, td {
+  text-align: center;
+}
+
+table#cashflow-table {
+  width: 42.5%;
+  margin-right: 15%;
+  float: left;
+}
+
+table#debt-table {
+  width: 42.5%;
+  float: left;
+}
+
+table.two-column td:first-child {
+  text-align: left;
+}
+table.two-column td:last-child {
+  text-align: right;
+}
+
+th {
+  color: #231F20;
+  font-weight: bold;
+}
+
+td {
+  color: #58595B
+}
+
+tr.strong td {
+  font-weight: bold;
+  color: #414042;
+}
+
+table input {
+  width: 80%;
+}
+
+table.five-columns th, table.five-columns td {
+  width: 20%;
+}
+
+table.units-table th:first-child, table.units-table td:first-child {
+  text-align: left;
+  width: 30%;
+}
+
+table.units-table td:first-child input {
+  text-align: left;
+  width: 90%;
+  padding-left: 5px;
+}
+
+table.units-table th, table.units-table td {
+  width: 16.25%;
+}
+
+table.units-table th:last-child, table.units-table td:last-child {
+  width: 5%;
+}
+
+table#operating-income-table {
+  margin-top: 30px;
+  width: 55%;
+}
+
+table.four-columns th, table.four-columns td {
+  width: 25%;
+}
+
+td:first-child {
+  text-align: left;
+}
+
+
+
+input,
+label,
+select,
+button,
+textarea
+{
+  margin:0;
+  border:0;
+  padding:0;
+  display:inline-block;
+  vertical-align:middle;
+  white-space:normal;
+  background:none;
+  line-height:1;
+  
+  /* Browsers have different default form fonts */
+  font-size:14px;
+  font-family:'Lato', sans-serif;
+}
+
+/* Remove the stupid outer glow in Webkit */
+input:focus
+{
+  outline:0;
+}
+
+/* Box Sizing Reset
+-----------------------------------------------*/
+
+/* All of our custom controls should be what we expect them to be */
+input,
+textarea
+{
+  -webkit-box-sizing:content-box;
+  -moz-box-sizing:content-box;
+  box-sizing:content-box;
+}
+input {
+  background: #1C75BC;
+  color: #fff;
+  text-align: center;
+}

@@ -8,7 +8,7 @@ export function percentOfProjectLand(p, u){
 
 export function totalSF(u) {
   let totalSF = 0
-  for(let i=0;i<u.length; i++) totalSF += u[i].SF
+  for(let i=0;i<u.length; i++) totalSF += parseInt(u[i].SF)
   return totalSF;
 }
 
@@ -38,7 +38,7 @@ export function totalProjectCost(p, u){
 
 export function rentMonthly(u){
   let totalRent = 0
-  for(let i=0;i<u.length; i++) totalRent += u[i].SF*u[i].rentPerSF
+  for(let i=0;i<u.length; i++) totalRent += Number(u[i].SF*u[i].rent)
   return totalRent;
 }
 
@@ -83,7 +83,7 @@ export function debtPaymentMonthly(p, u){
   let princ = exports.debt(p, u)
   let term = p.loanTermYears*12
 
-  return princ * intr / (1 - (Math.pow(1/(1 + intr), term)))
+  return -princ * intr / (1 - (Math.pow(1/(1 + intr), term)))
 }
 
 export function debtPaymentAnnual(p, u){
@@ -95,7 +95,7 @@ export function cashFlowMonthly(p, u){
 }
 
 export function cashFlowAnnual(p, u){
-  return exports.netOperatingIncome(p, u)-exports.debtPaymentAnnual(p, u)
+  return exports.netOperatingIncome(p, u)+exports.debtPaymentAnnual(p, u)
 }
 
 export function loanConstant(p, u){

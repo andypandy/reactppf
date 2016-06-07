@@ -16,7 +16,7 @@ class IndexComponent extends React.Component {
 
     return (
       <div>
-        <h1>Main component</h1>
+        <h1>React Pro Forma</h1>
         
         { !this.props.properties.length ? 
           <WelcomeComponent 
@@ -31,7 +31,7 @@ class IndexComponent extends React.Component {
         <a onClick={(e)=>{
           e.preventDefault()
           this.props.handleAddPropertyClick()
-        }}>Add property</a>
+        }}>Add property old</a>
 
         <input onChange={this.handleChange} />
 

@@ -1,10 +1,9 @@
 const initialState = [{
     property_id: 0,
-    name:'Cool initial property',
+    name:'Example property',
     landCost: 100000,
     landSF: 4523,
-    sf: 1200,
-    rentPerSFMonthly: 1.5,
+    SF: 1200,
     hardCostsPerSF: 100,
     softCostsPerSF: 25,
     vacancyRate: .05,
@@ -13,9 +12,6 @@ const initialState = [{
     loanTermYears: 30,
     loanRateAnnual:.05,
     units: [1,2]
-  },
-  {
-    property_id: 1, name: 'Another cool property', landCost: 0, landSF: 0, units: []
   }
 ]
 
@@ -27,8 +23,7 @@ const properties = (state = initialState, action) => {
         name:'New property',
         landCost: null,
         landSF: null,
-        sf: null,
-        rentPerSFMonthly: null,
+        SF: null,
         hardCostsPerSF: null,
         softCostsPerSF: null,
         vacancyRate: null,
@@ -41,10 +36,11 @@ const properties = (state = initialState, action) => {
 
     case 'UPDATE_PROPERTY':
       return state.map((property) => {
-        if(property.property_id == action.property_id) {
-          let newPropObj = {}
-          newPropObj[action.key] = action.value
-          return Object.assign({}, property, newPropObj)
+        console.log(action)
+        if(property.property_id == action.payload.property_id) {
+          return Object.assign({}, property, {
+            [action.payload.key]: action.payload.value
+          })
         }
         return property
       })

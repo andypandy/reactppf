@@ -17,10 +17,10 @@ describe('utilities/property ratio helpers', ()=>{
   }
 
   const units = [{
-    rentPerSF: 1.1,
+    rent: 1.1,
     SF: 800
   }, {
-    rentPerSF: 1.75,
+    rent: 1.75,
     SF: 1200
   }]
 
@@ -140,13 +140,13 @@ describe('utilities/property ratio helpers', ()=>{
   })
 
   it('should calculate monthly debt payment', ()=>{
-    let expected = 1503.1005444339933
+    let expected = -1503.1005444339933
     let actual = utils.debtPaymentMonthly(property, units)
     expect(expected).toEqual(actual)
   })
 
   it('should calculate annual debt payment', ()=>{
-    let expected = 18037.20653320792
+    let expected = -18037.20653320792
     let actual = utils.debtPaymentAnnual(property, units)
     expect(expected).toEqual(actual)
   })
@@ -164,13 +164,13 @@ describe('utilities/property ratio helpers', ()=>{
   })
 
   it('should calculate loan constant', ()=>{
-    let expected = 0.06441859476145685
+    let expected = -0.06441859476145685
     let actual = utils.loanConstant(property, units)
     expect(expected).toEqual(actual)
   })
 
   it('should calculate debt service coverage ratio', ()=>{
-    let expected = 1.318408144643596
+    let expected = -1.318408144643596
     let actual = utils.debtServiceCoverageRatio(property, units)
     expect(expected).toEqual(actual)
   })
