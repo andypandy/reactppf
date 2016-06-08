@@ -41,7 +41,27 @@ h2 {
   color: #BE1E2D;
 }
 
-.two-column input {
+ul.property-nav-links {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul.property-nav-links li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+ul.property-nav-links li.strong {
+  font-weight: bold;
+}
+
+ul.property-nav-links li:last-child {
+  margin-right: 0;
+}
+
+
+
+table.two-column input {
   text-align: right;
   padding-right: 5px;
   width: auto;

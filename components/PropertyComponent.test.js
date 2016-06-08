@@ -20,6 +20,7 @@ describe('components/PropertyComponent', ()=>{
     props.handleUpdateUnit = ()=>{}
     props.handleUpdateAddUnitForm = ()=>{}
     props.handleClearAddUnitForm = ()=>{}
+    props.propertyLinks = []
   })
 
   it('should handle updating a value', ()=>{
@@ -36,7 +37,7 @@ describe('components/PropertyComponent', ()=>{
       {unit_id: 17, rent: 999, SF: 1923}
     ]
     const wrapper = shallow(<PropertyComponent {...props} />)
-    const actual = wrapper.find('li .unit').length
+    const actual = wrapper.find('tr.unit').length
     const expected = 3
     expect(actual).toEqual(expected)
   })
@@ -90,4 +91,10 @@ describe('components/PropertyComponent', ()=>{
     expect(props.handleUpdateUnit).toHaveBeenCalledWith(5, 'rent', 400)
   }) 
   it('should handle deleting a property')
+  it('should show a list of properties along the top', ()=>{
+    props.propertyLinks = [{property_id: 5, name: '123 Main St'}, {property_id: 123, name: '456 B Avenue'}]
+    const wrapper = shallow(<PropertyComponent {...props} />)
+    expect(wrapper.find('.property-nav-links').find('li').length).toEqual(3)
+    expect(wrapper.find('.property-nav-links').find('Link').last().html()).toEqual('<a>456 B Avenue</a>')
+  })
 })

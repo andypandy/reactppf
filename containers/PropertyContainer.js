@@ -27,12 +27,17 @@ const getUnitsForProperty = (units, property) => {
 const mapStateToProps = (state, ownProps) => {
   const currentProperty = getCurrentProperty(state.properties, ownProps.routeParams.property_id)
   const currentUnits = getUnitsForProperty(state.units, currentProperty)
+  const propertyLinks = state.properties.map((property)=>{
+    return {property_id: property.property_id, name: property.name}
+  })
+  console.log(propertyLinks)
 
   return {
     forms: state.forms, 
     ui: state.ui,
     property: currentProperty,
-    units: currentUnits
+    units: currentUnits,
+    propertyLinks
   }
 }
 

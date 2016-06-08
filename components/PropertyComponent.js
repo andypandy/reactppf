@@ -6,7 +6,14 @@ const PropertyComponent = (props)=>{
   return (
     <div>
       <h1>React Pro Forma</h1>
-      <Link to={`/`}>Home</Link>
+      <ul className="property-nav-links">
+        <li><Link to={`/`}>Home</Link></li>
+        {props.propertyLinks.map((pl)=>{
+          return (
+            <li key={pl.property_id} className={pl.property_id == props.property.property_id ? 'strong' : ''}><Link to={`/property/${pl.property_id}`}>{pl.name}</Link></li>
+          )
+        })}
+      </ul>
 
       <div>
         <h2>Project cost</h2>
@@ -96,7 +103,7 @@ const PropertyComponent = (props)=>{
           <tbody>
             {props.units.map((unit)=>{
               return (
-                <tr key={unit.unit_id}>
+                <tr key={unit.unit_id} className="unit">
                   <td>
                     <input onChange={(e)=>{
                       props.handleUpdateUnit(unit.unit_id, 'name', e.target.value)
