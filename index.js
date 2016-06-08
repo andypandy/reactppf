@@ -30,11 +30,18 @@ const reducer = combineReducers({
   propertyList,
   routing: routerReducer
 })
+const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {}
+
 const store = createStore(
   reducer, 
+  persistedState,
   applyMiddleware(thunk),
   applyMiddleware(routerMiddleware(browserHistory))
 )
+
+store.subscribe(()=>{
+  localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+})
 
 const history = syncHistoryWithStore(browserHistory, store)
 
