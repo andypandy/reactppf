@@ -1,5 +1,5 @@
 import ReduxThunk from 'redux-thunk'
-import {push} from 'react-router-redux'
+import {browserHistory} from 'react-router'
 
 //Random ID generator
 function makeId(){
@@ -10,7 +10,7 @@ export const addPropertyThenRedirect = ()=>{
   return dispatch=>{
     const property_id = makeId()
     dispatch(exports.addProperty(property_id))
-    dispatch(push('/property/' + property_id))
+    browserHistory.push('/property/' + property_id)
   }
 }
 
@@ -40,6 +40,7 @@ export const deletePropertyAndUnits = (property_id, unit_ids) => {
       dispatch(exports.deleteUnit(property_id, unit_id))
     })
     dispatch(exports.deleteProperty(property_id))
+    browserHistory.push('/')
   }
 }
 

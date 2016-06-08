@@ -4,9 +4,9 @@ import React from 'react'
 import { render } from 'react-dom'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import thunk from 'redux-thunk';
 import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux'
+import thunk from 'redux-thunk';
 
 //Reducers
 import ui from './reducers/ui'
@@ -31,7 +31,6 @@ const reducer = combineReducers({
   routing: routerReducer
 })
 const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {}
-
 const store = createStore(
   reducer, 
   persistedState,

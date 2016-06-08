@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {push} from 'react-router-redux'
 import {
   updateProperty, 
   deletePropertyAndUnits,
@@ -44,7 +43,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleDeleteProperty: (property_id, unit_ids) => {
       dispatch(deletePropertyAndUnits(property_id, unit_ids))
-      dispatch(push('/'))
     },
 
     handleShowAddUnitForm: ()=>{
