@@ -112,15 +112,17 @@ describe('actions', ()=>{
       payload: {
         unit_id: 4,
         property_id: 5,
+        name: 'Unit 1',
         rent: 300,
         SF: 1234
       }
     }
     const unit_id = 4
     const property_id = 5
+    const name = 'Unit 1'
     const rent = 300
     const SF = 1234
-    const actual = actions.addUnit(unit_id, property_id, rent, SF)
+    const actual = actions.addUnit(unit_id, property_id, name, rent, SF)
     expect(actual).toEqual(expected)
 
   })

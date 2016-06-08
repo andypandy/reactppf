@@ -1,12 +1,13 @@
 import actions from '../actions'
 
 const initialState = {
-  name: null,
-  rent: null,
-  SF: null
+  name: '',
+  rent: '',
+  SF: ''
 }
 
 const forms = (state = initialState, action)=>{
+  console.log(action)
   switch(action.type) {
     case 'UPDATE_ADD_UNIT_FORM':
       return Object.assign({}, state, {
