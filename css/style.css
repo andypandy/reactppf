@@ -5,6 +5,14 @@ a {
   text-decoration: underline;
 }
 
+h1 {
+  background: #1C75BC;
+  color: #fff;
+  padding: 5px;
+  font-size: 39px;
+  line-height: 39px;
+}
+
 h2 {
   font-size: 35px;
   color: #414042;
