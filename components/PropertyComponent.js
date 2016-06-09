@@ -17,8 +17,8 @@ const PropertyComponent = (props)=>{
       </ul>
 
       <div>
-        <h2>Project name</h2>
-        <input id="propertyName" 
+        <h2 className="h2-top">Project name</h2>
+        <input id="propertyName"  autoFocus
           onChange={(e)=>{
             props.handleUpdateProperty(props.property.property_id, 'name', e.target.value)
           }} 
