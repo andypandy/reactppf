@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Redux Todos example",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server1.js",
     "test": "mocha --compilers js:babel-core/register --reporter spec ./**/*.test.js",
     "test:watch": "mocha --compilers js:babel-core/register --reporter spec --require testSetup.js --watch ./**/*.test.js",
     "build": "webpack --config ./webpack.production.config.js --progress --colors"
