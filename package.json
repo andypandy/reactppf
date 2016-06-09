@@ -6,8 +6,7 @@
     "start": "node server.js",
     "test": "mocha --compilers js:babel-core/register --reporter spec ./**/*.test.js",
     "test:watch": "mocha --compilers js:babel-core/register --reporter spec --require testSetup.js --watch ./**/*.test.js",
-    "build": "webpack --config ./webpack.production.config.js --progress --colors",
-    "heroku-prebuild": "webpack --config ./webpack.production.config.js --progress --colors"
+    "build": "webpack --config ./webpack.production.config.js --progress --colors"
   },
   "repository": {
     "type": "git",
