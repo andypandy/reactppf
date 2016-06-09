@@ -8,9 +8,19 @@ a {
 h1 {
   background: #1C75BC;
   color: #fff;
-  padding: 5px;
+  padding: 5px 5px 0;
   font-size: 39px;
   line-height: 39px;
+  margin-bottom: 0;
+}
+
+p.h1 {
+  background: #1C75BC;
+  color: #fff;
+  margin-top: 0;
+  padding: 0 5px 5px;
+  font-size: 19px;
+  font-weight: 300;
 }
 
 h2 {
@@ -18,6 +28,10 @@ h2 {
   color: #414042;
   font-weight: normal;
   font-weight: 500;
+}
+
+h2:first-child {
+  margin-top: 30px;
 }
 
 #root {width: 600px; margin: 0 auto;}
@@ -52,6 +66,24 @@ h2 {
   line-height: 50px;
 }
 
+.index-list-h2 {
+  font-size: 28px;
+  margin: 24px 0;
+  color: #444;
+}
+
+.index-list-p {
+  font-size: 26px;
+  margin: 0;
+  color: #58595B;
+}
+
+.index-property-list-add-properties-link {
+  font-size: 14px;
+  float: right;
+  line-height: 40px;
+}
+
 .fake-input {
   background: #1C75BC;
   color: #fff;
@@ -61,6 +93,17 @@ h2 {
 
 #welcome-add-property {
   font-size: inherit;
+}
+
+ul#index-property-list {
+  list-style-type: none;
+  margin-top: 0;
+  padding-left: 5px;
+}
+
+ul#index-property-list li a {
+  font-size: 24px;
+  line-height: 40px;
 }
 
 #show-add-unit-form-link {

@@ -6,6 +6,7 @@ const PropertyComponent = (props)=>{
   return (
     <div>
       <h1>React Pro Forma</h1>
+      <p className="h1">Dead simple real estate pro formas</p>
       <ul className="property-nav-links">
         <li><Link to={`/`}>Home</Link></li>
         {props.propertyLinks.map((pl)=>{

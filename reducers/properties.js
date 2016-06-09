@@ -1,19 +1,4 @@
-const initialState = [{
-    property_id: 0,
-    name:'Example property',
-    landCost: 100000,
-    landSF: 4523,
-    SF: 1200,
-    hardCostsPerSF: 100,
-    softCostsPerSF: 25,
-    vacancyRate: 5,
-    operatingExpenseRate: 30,
-    downPaymentRate: 20,
-    loanTermYears: 30,
-    loanRateAnnual:4.5,
-    units: [1,2]
-  }
-]
+const initialState = []
 
 const properties = (state = initialState, action) => {
   switch (action.type) {

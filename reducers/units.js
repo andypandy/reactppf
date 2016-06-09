@@ -1,8 +1,5 @@
 //const initialState = []
-const initialState = [
-  {unit_id: 1, name: 'Retail', rent:1.5, SF: 700},
-  {unit_id: 2, name: 'Residential', rent:1.5, SF: 1000}
-]
+const initialState = []
 
 
 const units  = (state = initialState, action) => {
