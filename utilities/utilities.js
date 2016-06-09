@@ -63,7 +63,7 @@ export function grossPotentialIncome(u){
 }
 
 export function vacancyExpense(p, u){
-  const ret = -exports.grossPotentialIncome(u)*p.vacancyRate
+  const ret = -exports.grossPotentialIncome(u)*(p.vacancyRate/100)
   return isNaN(ret) ? 0 : ret
 }
 
@@ -73,7 +73,7 @@ export function grossOperatingIncome(p, u){
 }
 
 export function operatingExpense(p, u){
-  const ret = -(exports.grossOperatingIncome(p, u))*p.operatingExpenseRate
+  const ret = -(exports.grossOperatingIncome(p, u))*(p.operatingExpenseRate/100)
   return isNaN(ret) ? 0 : ret
 }
 
@@ -88,7 +88,7 @@ export function cashReturn(p, u){
 }
 
 export function downPayment(p, u){
-  const ret = exports.totalProjectCost(p, u)*p.downPaymentRate
+  const ret = exports.totalProjectCost(p, u)*(p.downPaymentRate/100)
   return isNaN(ret) ? 0 : ret
 }
 
@@ -98,7 +98,7 @@ export function debt(p, u){
 }
 
 export function debtPaymentMonthly(p, u){
-  let intr = p.loanRateAnnual/12
+  let intr = (p.loanRateAnnual/100)/12
   let princ = exports.debt(p, u)
   let term = p.loanTermYears*12
 
@@ -122,12 +122,12 @@ export function cashFlowAnnual(p, u){
 }
 
 export function loanConstant(p, u){
-  const ret = exports.debtPaymentAnnual(p, u)/exports.debt(p, u)
+  const ret = exports.debtPaymentAnnual(p, u)/-exports.debt(p, u)
   return isNaN(ret) ? 0 : ret
 }
 
 export function debtServiceCoverageRatio(p, u){
-  const ret = exports.netOperatingIncome(p, u)/exports.debtPaymentAnnual(p, u)
+  const ret = exports.netOperatingIncome(p, u)/-exports.debtPaymentAnnual(p, u)
   return isNaN(ret) ? 0 : ret
 }
 

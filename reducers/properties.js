@@ -6,11 +6,11 @@ const initialState = [{
     SF: 1200,
     hardCostsPerSF: 100,
     softCostsPerSF: 25,
-    vacancyRate: .05,
-    operatingExpenseRate: .3,
-    downPaymentRate: .2,
+    vacancyRate: 5,
+    operatingExpenseRate: 30,
+    downPaymentRate: 20,
     loanTermYears: 30,
-    loanRateAnnual:.05,
+    loanRateAnnual:4.5,
     units: [1,2]
   }
 ]
@@ -26,11 +26,11 @@ const properties = (state = initialState, action) => {
         SF: null,
         hardCostsPerSF: null,
         softCostsPerSF: null,
-        vacancyRate: null,
-        operatingExpenseRate: null,
-        downPaymentRate: null,
-        loanTermYears: null,
-        loanRateAnnual: null,
+        vacancyRate: 5,
+        operatingExpenseRate: 30,
+        downPaymentRate: 20,
+        loanTermYears: 30,
+        loanRateAnnual: 4,
         units: []
       })
 

@@ -16,6 +16,15 @@ const PropertyComponent = (props)=>{
       </ul>
 
       <div>
+        <h2>Project name</h2>
+        <input id="propertyName" 
+          onChange={(e)=>{
+            props.handleUpdateProperty(props.property.property_id, 'name', e.target.value)
+          }} 
+          value={props.property.name} />
+      </div>
+
+      <div>
         <h2>Project cost</h2>
         <table className="five-columns">
           <thead>
@@ -180,11 +189,11 @@ const PropertyComponent = (props)=>{
             <tr>
               <td>Vacancy rate</td>
               <td>
-                <input id="vacancyRate" size="6"
+                <input id="vacancyRate" size="4"
                   onChange={(e)=>{
                     props.handleUpdateProperty(props.property.property_id, 'vacancyRate', e.target.value)
                   }} 
-                  value={props.property.vacancyRate} />
+                  value={props.property.vacancyRate} /> <span className="pbi">%</span>
               </td>
             </tr>
             <tr>
@@ -202,11 +211,11 @@ const PropertyComponent = (props)=>{
             <tr>
               <td>Operating expense rate</td>
               <td>
-                <input id="operatingExpenseRate" size="6"
+                <input id="operatingExpenseRate" size="4"
                   onChange={(e)=>{
                     props.handleUpdateProperty(props.property.property_id, 'operatingExpenseRate', e.target.value)
                   }} 
-                  value={props.property.operatingExpenseRate} />
+                  value={props.property.operatingExpenseRate} /> <span className="pbi">%</span>
               </td>
             </tr>
             <tr>
@@ -223,7 +232,7 @@ const PropertyComponent = (props)=>{
             </tr>
             <tr>
               <td>Cash return on project</td>
-              <td></td>
+              <td>{(utils.cashReturn(props.property, props.units)*100).toFixed(2)}%</td>
             </tr>
           </tbody>
         </table>
@@ -240,11 +249,11 @@ const PropertyComponent = (props)=>{
             <tr>
               <td>Down payment rate</td>
               <td>
-                <input id="downPaymentRate" size="6"
+                <input id="downPaymentRate" size="4"
                   onChange={(e)=>{
                     props.handleUpdateProperty(props.property.property_id, 'downPaymentRate', e.target.value)
                   }} 
-                  value={props.property.downPaymentRate} />
+                  value={props.property.downPaymentRate} /> <span className="pbi">%</span>
               </td>
             </tr>
             <tr>
@@ -305,11 +314,11 @@ const PropertyComponent = (props)=>{
             <tr>
               <td>Loan rate</td>
               <td>
-                <input id="loanRateAnnual" size="6"
+                <input id="loanRateAnnual" size="4"
                   onChange={(e)=>{
                     props.handleUpdateProperty(props.property.property_id, 'loanRateAnnual', e.target.value)
                   }} 
-                  value={props.property.loanRateAnnual} />
+                  value={props.property.loanRateAnnual} /> <span className="pbi">%</span>
               </td>
             </tr>
             <tr>
