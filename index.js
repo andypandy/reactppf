@@ -44,9 +44,13 @@ store.subscribe(()=>{
 
 const history = syncHistoryWithStore(browserHistory, store)
 
+const logPageview = ()=>{
+  console.log('pv', arguments)
+}
+
 render(
   <Provider store={store}>
-    <Router history={history}>
+    <Router history={history} onUpdate={logPageview}>
       <Route path="/" component={IndexContainer} />
       <Route path="/property/:property_id" component={PropertyContainer} />
     </Router>
