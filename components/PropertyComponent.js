@@ -98,7 +98,10 @@ const PropertyComponent = (props)=>{
 
       <div>
         <h2>Operating income</h2>
-        <table className="units-table">
+
+        <p className={props.units.length ? 'hidden no-units-message' : 'no-units-message'}>Your property has no units.</p>
+
+        <table className={!props.units.length ? 'hidden units-table' : 'units-table'}>
           <thead>
             <tr>
               <th>Name</th>
@@ -128,8 +131,8 @@ const PropertyComponent = (props)=>{
                       props.handleUpdateUnit(unit.unit_id, 'rent', e.target.value)
                     }} value={unit.rent}/>
                   </td>
-                  <td>{unit.rent*unit.SF}</td>
-                  <td>{unit.rent*unit.SF*12}</td>
+                  <td>{(unit.rent*unit.SF).toFixed(0)}</td>
+                  <td>{(unit.rent*unit.SF*12).toFixed(0)}</td>
                   <td>
                     <a href="#" className="deleteUnitButton red-link" onClick={(e)=>{
                       e.preventDefault()
@@ -143,41 +146,46 @@ const PropertyComponent = (props)=>{
               <td>Total</td>
               <td>{utils.totalSF(props.units)}</td>
               <td></td>
-              <td>{utils.rentMonthly(props.units)}</td>
-              <td>{utils.rentAnnual(props.units)}</td>
+              <td>{utils.rentMonthly(props.units).toFixed(0)}</td>
+              <td>{utils.rentAnnual(props.units).toFixed(0)}</td>
             </tr>
           </tbody>
         </table>
 
-        <p className={props.units.length ? 'hidden' : ''}>No units added</p>
-
-        <a href="#" id="showAddUnitFormButton" onClick={(e)=>{
+        <a href="#" id="show-add-unit-form-link" onClick={(e)=>{
           e.preventDefault()
           props.handleShowAddUnitForm()
-        }}>Add a unit</a>
+        }}>{!props.units.length ? 'Add a unit' : 'Add another unit'}</a>
 
-
-        <div id="addUnitFormContainer" className={props.ui.showAddUnitForm ? '' : 'hidden'}>
-          <label>Name of unit</label>
-          <input id="addUnitFormName" value={props.forms.name} name="name" onChange={(e)=>{
-            props.handleUpdateAddUnitForm('name', e.target.value)
-          }} />
-          <label>Unit's monthly rent</label>
-          <input id="addUnitFormRent" value={props.forms.rent} name="rent" onChange={(e)=>{
-            props.handleUpdateAddUnitForm('rent', e.target.value)
-          }} />
-          <label>Square feet of unit</label>
-          <input id="addUnitFormSF" value={props.forms.SF} name="SF" onChange={(e)=>{
-            props.handleUpdateAddUnitForm('SF', e.target.value)
-          }} />
-          <a id="addUnitButton" onClick={(e)=>{
-            e.preventDefault()
-            props.handleAddUnit(props.property.property_id, props.forms.name, props.forms.rent, props.forms.SF)
-          }}>Add</a> | 
-          <a id="closeAddUnitForm" onClick={(e)=>{
-            e.preventDefault()
-            props.handleCloseAddUnitForm()
-          }}>Cancel</a>
+        <div id="add-unit-form-container" className={props.ui.showAddUnitForm ? '' : 'hidden'}>
+          <div>
+            <label>Name of unit</label>
+            <input id="addUnitFormName" className="wide" value={props.forms.name} name="name" onChange={(e)=>{
+              props.handleUpdateAddUnitForm('name', e.target.value)
+            }} />
+          </div>
+          <div>
+            <label>Square feet of unit</label>
+            <input id="addUnitFormSF" value={props.forms.SF} name="SF" onChange={(e)=>{
+              props.handleUpdateAddUnitForm('SF', e.target.value)
+            }} />
+          </div>
+          <div>
+            <label>Rent <strong>per square foot</strong></label>
+            <input id="addUnitFormRent" value={props.forms.rent} name="rent" onChange={(e)=>{
+              props.handleUpdateAddUnitForm('rent', e.target.value)
+            }} />
+          </div>
+          <div>
+            <a id="addUnitButton" href="#" onClick={(e)=>{
+              e.preventDefault()
+              props.handleAddUnit(props.property.property_id, props.forms.name, props.forms.rent, props.forms.SF)
+            }}>Add unit</a> |&nbsp;
+            <a id="closeAddUnitForm" href="#" onClick={(e)=>{
+              e.preventDefault()
+              props.handleCloseAddUnitForm()
+            }}>Cancel</a>
+          </div>
         </div>
 
         <table className="two-column" id="operating-income-table">

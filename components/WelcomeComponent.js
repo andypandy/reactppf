@@ -3,11 +3,10 @@ import React from 'react'
 const WelcomeComponent = ({handleAddPropertyClick}) => {
   return (
     <div>
-      <p>Welcome message</p>
-      <a id="add_property" onClick={(e)=>{
+      <p className="welcome-message">Welcome to React Pro Forma. <br />To get started, <a href="#" id="welcome-add-property" onClick={(e)=>{
         e.preventDefault()
         handleAddPropertyClick()
-      }}>Add property</a>
+      }}>add a property</a>. <br /><span className="fake-input">Form fields in blue are inputs</span></p>
     </div>
   )
 }
