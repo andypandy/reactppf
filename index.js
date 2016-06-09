@@ -44,8 +44,12 @@ store.subscribe(()=>{
 
 const history = syncHistoryWithStore(browserHistory, store)
 
+
+import ga from 'react-ga'
+ga.initialize('UA-79059101-1')
+
 const logPageview = ()=>{
-  console.log('pv', arguments)
+  ga.pageview(window.location.pathname);
 }
 
 render(
