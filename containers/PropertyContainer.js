@@ -30,7 +30,6 @@ const mapStateToProps = (state, ownProps) => {
   const propertyLinks = state.properties.map((property)=>{
     return {property_id: property.property_id, name: property.name}
   })
-  console.log(propertyLinks)
 
   return {
     forms: state.forms, 

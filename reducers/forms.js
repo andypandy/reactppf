@@ -7,7 +7,6 @@ const initialState = {
 }
 
 const forms = (state = initialState, action)=>{
-  console.log(action)
   switch(action.type) {
     case 'UPDATE_ADD_UNIT_FORM':
       return Object.assign({}, state, {
