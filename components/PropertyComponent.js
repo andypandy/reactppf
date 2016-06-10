@@ -181,8 +181,8 @@ const PropertyComponent = (props)=>{
             <a id="addUnitButton" href="#" onClick={(e)=>{
               e.preventDefault()
               props.handleAddUnit(props.property.property_id, props.forms.name, props.forms.rent, props.forms.SF)
-            }}>Add unit</a> |&nbsp;
-            <a id="closeAddUnitForm" href="#" onClick={(e)=>{
+            }}>Add unit</a>&nbsp;
+            <a id="closeAddUnitForm" className="red-link" href="#" onClick={(e)=>{
               e.preventDefault()
               props.handleCloseAddUnitForm()
             }}>Cancel</a>
@@ -473,10 +473,10 @@ const PropertyComponent = (props)=>{
             </tr>
             <tr>
               <td>Net worth to loan size ratio †</td>
-              <td className={props.property.borrowersNetWorth/utils.debt(props.property, props.units) < 1 ? 'good' : 'bad'}>
+              <td className={props.property.borrowersNetWorth/utils.debt(props.property, props.units) >= 1 ? 'good' : 'bad'}>
                 {(props.property.borrowersNetWorth/utils.debt(props.property, props.units)).toFixed(2)}
               </td>
-              <td>&lt;=1</td>
+              <td>&gt;=1</td>
               <td>borrowers' net worth / loan amount</td>
             </tr>
             <tr>
@@ -513,7 +513,7 @@ const PropertyComponent = (props)=>{
             </tr>
           </tbody>
         </table>
-        <p className="footnotes">* Uses cap rate input above<br />† Commercial loans only<br />‡ Depends on the loan product</p>
+        <p className="footnotes">* Uses cap rate input above<br />† Commercial loans only<br />‡ Requirement depends on the loan product</p>
       </div>
 
       <div>
