@@ -441,18 +441,18 @@ const PropertyComponent = (props)=>{
           <tbody>
             <tr>
               <td>Loan to cost ratio</td>
-              <td className={utils.loanToCostRatio(props.property, props.units) < .8 ? 'good' : 'bad'}>
+              <td className={utils.loanToCostRatio(props.property, props.units) <= .8 ? 'good' : 'bad'}>
                 {(utils.loanToCostRatio(props.property, props.units)*100).toFixed(2)}%
               </td>
-              <td>&lt;80%</td>
+              <td>&lt;80% ‡</td>
               <td>loan amount / total cost</td>
             </tr>
             <tr>
               <td>Loan to value ratio *</td>
-              <td className={utils.loanToValueRatio(props.property, props.units) < .7 ? 'good' : 'bad'}>
+              <td className={utils.loanToValueRatio(props.property, props.units) <= .7 ? 'good' : 'bad'}>
                 {(utils.loanToValueRatio(props.property, props.units)*100).toFixed(2)}%
               </td>
-              <td>&lt;70%</td>
+              <td>&lt;70% ‡</td>
               <td>loan amount / after construction value</td>
             </tr>
             <tr>
@@ -488,11 +488,11 @@ const PropertyComponent = (props)=>{
               <td>NOI / loan amount</td>
             </tr>
             <tr>
-              <td>Debt to income ratio ‡</td>
+              <td>Debt to income ratio</td>
               <td className={-utils.debtPaymentAnnual(props.property, props.units)/props.property.borrowersIncome < .43 ? 'good' : 'bad'}>
                 {(-utils.debtPaymentAnnual(props.property, props.units)/props.property.borrowersIncome*100).toFixed(2)}%
               </td>
-              <td>&lt;43%</td>
+              <td>&lt;43% ‡</td>
               <td>debt service / borrowers' income</td>
             </tr>
             <tr>
@@ -517,10 +517,12 @@ const PropertyComponent = (props)=>{
       </div>
 
       <div>
-        <a onClick={(e)=>{
+        <a id="delete-property-link" className="red-link" href="#" onClick={(e)=>{
           e.preventDefault()
-          props.handleDeleteProperty(props.property.property_id, props.property.units)
-        }}>Delete property button</a>
+          if(window.confirm('Do you really want to delete this property?')) {
+            props.handleDeleteProperty(props.property.property_id, props.property.units)
+          }
+        }}>Delete this property</a>
       </div>
 
     </div>

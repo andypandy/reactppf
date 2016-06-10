@@ -283,7 +283,11 @@ p.footnotes {
   color: #58595B;
 }
 
-
+#delete-property-link {
+  margin: 30px 0 100px;
+  display: inline-block;
+  font-size: 24px;
+}
 
 input,
 label,
