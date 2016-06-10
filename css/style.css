@@ -34,7 +34,7 @@ h2.h2-top {
   margin-top: 30px;
 }
 
-#root {width: 600px; margin: 0 auto;}
+#root {width: 650px; margin: 0 auto;}
 
 .hidden {display: none;}
 
@@ -186,6 +186,24 @@ table#debt-table {
   float: left;
 }
 
+table#financial-info-table {
+  width: 60%;
+}
+
+table#financial-ratios-table {
+  margin-top: 40px;
+}
+
+table#financial-ratios-table tr th:first-child, table#financial-ratios-table tr td:first-child {
+  text-align: left;
+  width: 32%;
+}
+
+table#financial-ratios-table tr th:last-child, table#financial-ratios-table tr td:last-child {
+  text-align: left;
+  width: 40%;
+}
+
 table.two-column td:first-child {
   text-align: left;
 }
@@ -199,12 +217,22 @@ th {
 }
 
 td {
-  color: #58595B
+  color: #58595B;
 }
 
 tr.strong td {
   font-weight: bold;
   color: #414042;
+}
+
+td.good {
+  background: #34A851;
+  color: #fff;
+}
+
+td.bad {
+  background: #BE1E2D;
+  color: #fff;
 }
 
 table input {
@@ -249,6 +277,10 @@ table.four-columns th, table.four-columns td {
 
 td:first-child {
   text-align: left;
+}
+
+p.footnotes {
+  color: #58595B;
 }
 
 

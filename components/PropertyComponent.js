@@ -356,6 +356,167 @@ const PropertyComponent = (props)=>{
       </div>
 
       <div>
+        <h2>Financial ratios</h2>
+        <table id="financial-info-table" className="two-column">
+          <tbody>
+            <tr>
+              <td>Cap rate</td>
+              <td>
+                <input id="capRate" size="4"
+                  onChange={(e)=>{
+                    props.handleUpdateProperty(props.property.property_id, 'capRate', e.target.value)
+                  }} 
+                  value={props.property.capRate} /> <span className="pbi">%</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Borrower's net worth</td>
+              <td>
+                <input id="borrowers-net-worth" size="10"
+                  onChange={(e)=>{
+                    props.handleUpdateProperty(props.property.property_id, 'borrowersNetWorth', e.target.value)
+                  }} 
+                  value={props.property.borrowersNetWorth} />
+              </td>
+            </tr>
+            <tr>
+              <td>Borrower's income</td>
+              <td>
+                <input id="borrowers-income"  size="10"
+                  onChange={(e)=>{
+                    props.handleUpdateProperty(props.property.property_id, 'borrowersIncome', e.target.value)
+                  }} 
+                  value={props.property.borrowersIncome} />
+              </td>
+            </tr>
+            <tr>
+              <td>Down payment</td>
+              <td>{utils.downPayment(props.property, props.units).toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td>Loan amount</td>
+              <td>{utils.debt(props.property, props.units).toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td>Total project cost</td>
+              <td>{utils.totalProjectCost(props.property, props.units).toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td>After construction value</td>
+              <td>{(utils.netOperatingIncome(props.property, props.units)/(props.property.capRate/100)).toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td>Profit (from sale)</td>
+              <td>{(utils.profit(props.property, props.units)).toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td>Gross potential income (GPI)</td>
+              <td>{utils.grossPotentialIncome(props.units).toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td>Net operating income (NOI)</td>
+              <td>{utils.netOperatingIncome(props.property, props.units).toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td>Annual debt service</td>
+              <td className="negative">{utils.debtPaymentAnnual(props.property, props.units).toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td>Debt service coverage ratio</td>
+              <td>{utils.debtServiceCoverageRatio(props.property, props.units).toFixed(2)}</td>
+            </tr>
+  
+          </tbody>
+        </table>
+
+        <table id="financial-ratios-table">
+          <thead>
+            <tr>
+              <th>Ratio</th>
+              <th>Value</th>
+              <th>Guideline</th>
+              <th>Formula</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Loan to cost ratio</td>
+              <td className={utils.loanToCostRatio(props.property, props.units) < .8 ? 'good' : 'bad'}>
+                {(utils.loanToCostRatio(props.property, props.units)*100).toFixed(2)}%
+              </td>
+              <td>&lt;80%</td>
+              <td>loan amount / total cost</td>
+            </tr>
+            <tr>
+              <td>Loan to value ratio *</td>
+              <td className={utils.loanToValueRatio(props.property, props.units) < .7 ? 'good' : 'bad'}>
+                {(utils.loanToValueRatio(props.property, props.units)*100).toFixed(2)}%
+              </td>
+              <td>&lt;70%</td>
+              <td>loan amount / after construction value</td>
+            </tr>
+            <tr>
+              <td>Debt service coverage ratio</td>
+              <td className={utils.debtServiceCoverageRatio(props.property, props.units) > 1.25 ? 'good' : 'bad'}>
+                {utils.debtServiceCoverageRatio(props.property, props.units).toFixed(2)}
+              </td>
+              <td>&gt;1.25</td>
+              <td>NOI / debt service</td>
+            </tr>
+            <tr>
+              <td>Profit ratio *</td>
+              <td className={utils.profitRatio(props.property, props.units) > .2 ? 'good' : 'bad'}>
+                {(utils.profitRatio(props.property, props.units)*100).toFixed(2)}%
+              </td>
+              <td>&gt;20%</td>
+              <td>profit / total cost</td>
+            </tr>
+            <tr>
+              <td>Net worth to loan size ratio †</td>
+              <td className={props.property.borrowersNetWorth/utils.debt(props.property, props.units) < 1 ? 'good' : 'bad'}>
+                {(props.property.borrowersNetWorth/utils.debt(props.property, props.units)).toFixed(2)}
+              </td>
+              <td>&lt;=1</td>
+              <td>borrowers' net worth / loan amount</td>
+            </tr>
+            <tr>
+              <td>Debt yield ratio</td>
+              <td className={utils.netOperatingIncome(props.property, props.units)/utils.debt(props.property, props.units) > .09 ? 'good' : 'bad'}>
+                {(utils.netOperatingIncome(props.property, props.units)/utils.debt(props.property, props.units)*100).toFixed(2)}%
+              </td>
+              <td>&gt;9%</td>
+              <td>NOI / loan amount</td>
+            </tr>
+            <tr>
+              <td>Debt to income ratio ‡</td>
+              <td className={-utils.debtPaymentAnnual(props.property, props.units)/props.property.borrowersIncome < .43 ? 'good' : 'bad'}>
+                {(-utils.debtPaymentAnnual(props.property, props.units)/props.property.borrowersIncome*100).toFixed(2)}%
+              </td>
+              <td>&lt;43%</td>
+              <td>debt service / borrowers' income</td>
+            </tr>
+            <tr>
+              <td>100 Rule</td>
+              <td className={utils.totalProjectCost(props.property, props.units)/(utils.grossPotentialIncome(props.units)/12) <= 100 ? 'good' : 'bad'}>
+                {(utils.totalProjectCost(props.property, props.units)/(utils.grossPotentialIncome(props.units)/12)).toFixed(2)}
+              </td>
+              <td>&lt;=100</td>
+              <td>total cost / monthly gross income</td>
+            </tr>
+            <tr>
+              <td>Profit to equity ratio *</td>
+              <td className={utils.profitToEquityRatio(props.property, props.units) > 1 ? 'good' : 'bad'}>
+                {(utils.profitToEquityRatio(props.property, props.units)*100).toFixed(2)}%
+              </td>
+              <td>&gt;=100%</td>
+              <td>profit / down payment</td>
+            </tr>
+          </tbody>
+        </table>
+        <p className="footnotes">* Uses cap rate input above<br />† Commercial loans only<br />‡ Depends on the loan product</p>
+      </div>
+
+      <div>
         <a onClick={(e)=>{
           e.preventDefault()
           props.handleDeleteProperty(props.property.property_id, props.property.units)

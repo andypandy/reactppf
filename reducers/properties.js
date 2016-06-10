@@ -16,7 +16,10 @@ const properties = (state = initialState, action) => {
         downPaymentRate: 20,
         loanTermYears: 30,
         loanRateAnnual: 4,
-        units: []
+        units: [],
+        capRate: null,
+        borrowersNetWorth: null,
+        borrowersIncome: null
       })
 
     case 'UPDATE_PROPERTY':

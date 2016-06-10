@@ -135,3 +135,31 @@ export function preTaxReturnOnEquity(p, u){
   const ret = exports.cashFlowAnnual(p, u)/exports.downPayment(p, u)
   return isNaN(ret) ? 0 : ret
 }
+
+export function loanToCostRatio(p, u) {
+  //(utils.debt(props.property, props.units)/utils.totalProjectCost(props.property, props.units)
+  const ret = exports.debt(p,u)/exports.totalProjectCost(p,u)
+  return isNaN(ret) ? 0 : ret
+}
+
+export function loanToValueRatio(p,u) {
+  const ret = exports.debt(p,u)/(exports.netOperatingIncome(p,u)/(p.capRate/100))
+  return isNaN(ret) ? 0 : ret
+}
+
+export function profit(p,u) {
+  const ret = exports.netOperatingIncome(p,u)/(p.capRate/100)-exports.totalProjectCost(p,u)
+  return isNaN(ret) ? 0 : ret
+}
+
+export function profitRatio(p,u) {
+  const ret = exports.profit(p,u)/exports.totalProjectCost(p,u)
+  return isNaN(ret) ? 0 : ret
+}
+
+export function profitToEquityRatio(p,u) {
+  const ret = exports.profit(p,u)/exports.downPayment(p,u)
+  return isNaN(ret) ? 0 : ret
+}
+
+
